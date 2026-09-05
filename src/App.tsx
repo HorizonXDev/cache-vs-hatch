@@ -18,7 +18,7 @@ import {
   computeBDHSynapticMatrix,
   queryModels,
 } from './utils/mathEngine';
-import { Sparkles, Cpu, Play, Flame, Box } from 'lucide-react';
+import { Sparkles, Cpu, Play, Flame, Box, FlaskConical } from 'lucide-react';
 
 export function App() {
   // Main view mode: '3d' (3D Interactive Model Simulation) vs 'toy' (5-token simulator) vs 'sandbox' (Full N=5..100) vs 'stress' (1,000,000 token simulator)
@@ -73,6 +73,22 @@ export function App() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased selection:bg-cyan-500 selection:text-black">
       {/* Header Banner */}
       <HeaderBanner />
+
+      {/* Toy reimplementation disclosure — hackathon rule: toy models must be identified as such */}
+      <div className="border-b border-amber-900/40 bg-amber-950/25">
+        <div className="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8 flex items-start gap-2.5 text-[11px] sm:text-xs leading-relaxed text-amber-100/90">
+          <FlaskConical className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <p>
+            <span className="font-bold text-amber-300">Toy reimplementation — not the official BDH model: </span>
+            this app is our own simplified teaching reimplementation of BDH's Hebbian fast-weight
+            mechanism (W<sub>t</sub> = λ·W<sub>t-1</sub> + k·v<sup>T</sup>), built from scratch for
+            DataForge 2026. It is not Pathway's actual BDH model or codebase — real BDH adds
+            architectural details not modeled here (e.g. sparse activation gating, GPU-friendly
+            formulation, scale-free graph structure). Where the app cites Pathway figures, they are
+            labeled as reported and linked to their sources.
+          </p>
+        </div>
+      </div>
 
       {/* Mode Switcher Navigation Bar */}
       <div className="bg-slate-900/90 border-b border-slate-800 px-4 py-2.5">
@@ -153,8 +169,16 @@ export function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
-        {/* Head-to-Head Victory Dashboard (Always accessible at top) */}
-        <VictoryDashboard />
+        {/* Head-to-Head Trade-off Dashboard (always accessible at top; fed by live sim state) */}
+        <VictoryDashboard
+          sequenceLength={sequenceLength}
+          dimension={dimension}
+          decayLambda={decayLambda}
+          selectedIndex={validSelectedIndex}
+          transformerState={transformerState}
+          bdhState={bdhState}
+          retrievalResult={retrievalResult}
+        />
 
         {/* MODE 1: 3D Interactive Model Simulation */}
         {viewMode === '3d' && (
