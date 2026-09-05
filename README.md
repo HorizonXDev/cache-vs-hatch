@@ -30,3 +30,24 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+---
+
+## Deploying to GitHub Pages
+
+The repo ships a GitHub Actions workflow (`.github/workflows/deploy.yml`) that
+builds the app (`npm ci && npm run build`) and publishes `dist/` to GitHub
+Pages automatically on every push to `master` (or manually via the **Actions →
+Run workflow** button).
+
+One-time setup on GitHub:
+
+1. Push the repo to GitHub (branch `master`).
+2. Open **Settings → Pages** and set **Source** to **GitHub Actions** (not
+   "Deploy from a branch").
+3. Push anything to `master` (or run the workflow manually) and the site goes
+   live at `https://horizonxdev.github.io/cache-vs-hatch/`.
+
+Because this is a *project* site, `vite.config.ts` sets
+`base: '/cache-vs-hatch/'` so the bundled assets resolve under the repo
+sub-path — if you rename the repo on GitHub, update `base` to match.
