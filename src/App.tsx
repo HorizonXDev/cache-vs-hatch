@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react';
+import type { ReactNode } from 'react';
 import { HeaderBanner } from './components/HeaderBanner';
-import { ControlsBar } from './components/ControlsBar';
+import { LandingStory } from './components/LandingStory';
 import { VictoryDashboard } from './components/VictoryDashboard';
 import { Model3DSimulator } from './components/Model3DSimulator';
 import { StressSimulator } from './components/StressSimulator';
-import { AnimatedMemoryFlow } from './components/AnimatedMemoryFlow';
 import { Class10Explainer } from './components/Class10Explainer';
 import { PanelTransformer } from './components/PanelTransformer';
 import { PanelBDH } from './components/PanelBDH';
@@ -12,19 +12,23 @@ import { TestBench } from './components/TestBench';
 import { RecallDecayCurve } from './components/RecallDecayCurve';
 import { GuidedLesson } from './components/GuidedLesson';
 import { StepByStepToyModel } from './components/StepByStepToyModel';
+import { ControlsBar } from './components/ControlsBar';
 import {
   generateTokenSequence,
   computeTransformerKVCache,
   computeBDHSynapticMatrix,
   queryModels,
 } from './utils/mathEngine';
-import { Sparkles, Cpu, Play, Flame, Box, FlaskConical } from 'lucide-react';
+import { Sparkles, Cpu, Box, Flame, BookOpenCheck, ArrowLeft, FlaskConical } from 'lucide-react';
+
+type LabTab = 'simulator' | '3d' | 'stress' | 'theory';
 
 export function App() {
-  // Main view mode: '3d' (3D Interactive Model Simulation) vs 'toy' (5-token simulator) vs 'sandbox' (Full N=5..100) vs 'stress' (1,000,000 token simulator)
-  const [viewMode, setViewMode] = useState<'3d' | 'toy' | 'sandbox' | 'stress'>('3d');
+  // Simple story first; the full simulator/tools live behind the "Technical Lab".
+  const [showLab, setShowLab] = useState<boolean>(false);
+  const [labTab, setLabTab] = useState<LabTab>('simulator');
 
-  // State for controls (Defaults: N=20, decay=0.95, D=8)
+  // State for the live simulation (defaults: N=20, decay=0.95, D=8)
   const [sequenceLength, setSequenceLength] = useState<number>(20);
   const [decayLambda, setDecayLambda] = useState<number>(0.95);
   const [dimension, setDimension] = useState<number>(8);
@@ -69,6 +73,37 @@ export function App() {
     setSeed((prev) => prev + 1);
   };
 
+  // Open the technical lab (optionally on a specific tab)
+  const openLab = (tab: LabTab = 'simulator') => {
+    setLabTab(tab);
+    setShowLab(true);
+  };
+
+  const labTabButton = (
+    active: boolean,
+    tab: LabTab,
+    icon: ReactNode,
+    label: string,
+    sub: string,
+    activeClasses: string
+  ) => (
+    <button
+      key={tab}
+      onClick={() => setLabTab(tab)}
+      className={`px-3.5 py-2 rounded-lg text-left transition-all flex items-center gap-2.5 border ${
+        active ? activeClasses : 'bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-700'
+      }`}
+    >
+      {icon}
+      <span className="flex flex-col">
+        <span className="text-xs font-bold leading-tight">{label}</span>
+        <span className={`text-[9px] font-mono leading-tight ${active ? 'opacity-80' : 'text-slate-500'}`}>
+          {sub}
+        </span>
+      </span>
+    </button>
+  );
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased selection:bg-cyan-500 selection:text-black">
       {/* Header Banner */}
@@ -90,160 +125,159 @@ export function App() {
         </div>
       </div>
 
-      {/* Mode Switcher Navigation Bar */}
-      <div className="bg-slate-900/90 border-b border-slate-800 px-4 py-2.5">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-400">Learning Mode:</span>
-            <button
-              onClick={() => setViewMode('3d')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 transition-all ${
-                viewMode === '3d'
-                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
-            >
-              <Box className="w-3.5 h-3.5" />
-              🎮 Mode 1: 3D Interactive Model Simulation
-            </button>
-            <button
-              onClick={() => setViewMode('toy')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 transition-all ${
-                viewMode === 'toy'
-                  ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
-            >
-              <Play className="w-3.5 h-3.5 fill-current" />
-              🐣 Mode 2: Step-by-Step Toy Simulator
-            </button>
-            <button
-              onClick={() => setViewMode('sandbox')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 transition-all ${
-                viewMode === 'sandbox'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
-            >
-              <Cpu className="w-3.5 h-3.5" />
-              🧪 Mode 3: Full Benchmark Sandbox (N=5..100)
-            </button>
-            <button
-              onClick={() => setViewMode('stress')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 transition-all ${
-                viewMode === 'stress'
-                  ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
-            >
-              <Flame className="w-3.5 h-3.5 text-amber-300" />
-              ⚡ Mode 4: 1,000,000 Token Stress Simulator & BDH Wins
-            </button>
-          </div>
-
-          <div className="text-[11px] text-slate-400 font-mono hidden lg:block">
-            {viewMode === '3d'
-              ? 'Viewing: 3D Model Interior Simulation'
-              : viewMode === 'toy'
-              ? 'Viewing: Step-by-step 5-token simulator'
-              : viewMode === 'sandbox'
-              ? `Viewing: Full benchmark (N=${sequenceLength}, D=${dimension})`
-              : 'Viewing: 1,000,000 Token VRAM Stress Simulator'}
-          </div>
-        </div>
-      </div>
-
-      {/* Controls Bar (Visible in Sandbox) */}
-      {viewMode === 'sandbox' && (
-        <ControlsBar
-          sequenceLength={sequenceLength}
-          setSequenceLength={setSequenceLength}
-          decayLambda={decayLambda}
-          setDecayLambda={setDecayLambda}
-          dimension={dimension}
-          setDimension={setDimension}
-          onRegenerate={handleRegenerate}
-          onApplyPreset={handleApplyPreset}
-        />
-      )}
-
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
-        {/* Head-to-Head Trade-off Dashboard (always accessible at top; fed by live sim state) */}
-        <VictoryDashboard
-          sequenceLength={sequenceLength}
-          dimension={dimension}
-          decayLambda={decayLambda}
-          selectedIndex={validSelectedIndex}
-          transformerState={transformerState}
-          bdhState={bdhState}
-          retrievalResult={retrievalResult}
-        />
+        {!showLab ? (
+          /* ---------------- SIMPLE STORY (default landing) ---------------- */
+          <LandingStory onOpenLab={() => openLab('simulator')} />
+        ) : (
+          /* ---------------- TECHNICAL LAB ---------------- */
+          <div className="space-y-6 animate-in fade-in duration-200">
+            {/* Lab header */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-slate-800 pb-5">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                    TECHNICAL LAB
+                  </span>
+                  <span className="text-xs text-slate-400 font-mono">the same simulation, with the dials exposed</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white">Full simulator &amp; deep dive</h2>
+                <p className="text-xs sm:text-sm text-slate-400 max-w-3xl mt-1 leading-relaxed">
+                  Every number here is computed live in your browser from seeded random vectors —
+                  nothing is hardcoded. Use the tabs to explore the matrices, the 3D view, an
+                  extreme-scale memory test, or the cited theory.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowLab(false)}
+                className="shrink-0 self-start md:self-end px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to the simple explainer
+              </button>
+            </div>
 
-        {/* MODE 1: 3D Interactive Model Simulation */}
-        {viewMode === '3d' && (
-          <div className="space-y-8 animate-in fade-in duration-200">
-            <Model3DSimulator />
-            <AnimatedMemoryFlow />
-            <Class10Explainer />
-          </div>
-        )}
+            {/* Lab tabs (plain English) */}
+            <nav className="flex flex-wrap gap-2">
+              {labTabButton(
+                labTab === 'simulator',
+                'simulator',
+                <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />,
+                'Interactive simulator',
+                'change N / D / λ · compare side by side',
+                'bg-cyan-950 border-cyan-500/60 text-white shadow-md shadow-cyan-950/40'
+              )}
+              {labTabButton(
+                labTab === '3d',
+                '3d',
+                <Box className="w-4 h-4 text-purple-400 shrink-0" />,
+                '3D animations',
+                'watch both designs as scenes',
+                'bg-purple-950 border-purple-500/60 text-white shadow-md shadow-purple-950/40'
+              )}
+              {labTabButton(
+                labTab === 'stress',
+                'stress',
+                <Flame className="w-4 h-4 text-pink-400 shrink-0" />,
+                'Extreme scale — up to 1M words',
+                'memory required at huge context',
+                'bg-pink-950 border-pink-500/60 text-white shadow-md shadow-pink-950/40'
+              )}
+              {labTabButton(
+                labTab === 'theory',
+                'theory',
+                <BookOpenCheck className="w-4 h-4 text-indigo-400 shrink-0" />,
+                'Theory, lesson & quiz',
+                'the science behind the demo',
+                'bg-indigo-950 border-indigo-500/60 text-white shadow-md shadow-indigo-950/40'
+              )}
+            </nav>
 
-        {/* MODE 2: Step-by-Step Toy Model & Beginner Lesson */}
-        {viewMode === 'toy' && (
-          <div className="space-y-8 animate-in fade-in duration-200">
-            <StepByStepToyModel decayLambda={decayLambda} />
-            <GuidedLesson />
-          </div>
-        )}
+            {/* ---------------- Tab: Interactive simulator ---------------- */}
+            {labTab === 'simulator' && (
+              <div className="space-y-8">
+                <ControlsBar
+                  sequenceLength={sequenceLength}
+                  setSequenceLength={setSequenceLength}
+                  decayLambda={decayLambda}
+                  setDecayLambda={setDecayLambda}
+                  dimension={dimension}
+                  setDimension={setDimension}
+                  onRegenerate={handleRegenerate}
+                  onApplyPreset={handleApplyPreset}
+                />
 
-        {/* MODE 3: Full Benchmark Sandbox */}
-        {viewMode === 'sandbox' && (
-          <div className="space-y-8 animate-in fade-in duration-200">
-            <GuidedLesson />
+                {/* Honest head-to-head summary (computed live) */}
+                <VictoryDashboard
+                  sequenceLength={sequenceLength}
+                  dimension={dimension}
+                  decayLambda={decayLambda}
+                  selectedIndex={validSelectedIndex}
+                  transformerState={transformerState}
+                  bdhState={bdhState}
+                  retrievalResult={retrievalResult}
+                />
 
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <PanelTransformer
-                transformerState={transformerState}
-                sequenceLength={sequenceLength}
-                dimension={dimension}
-                selectedIndex={validSelectedIndex}
-                attentionWeights={retrievalResult.transformerAttention}
-              />
+                <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <PanelTransformer
+                    transformerState={transformerState}
+                    sequenceLength={sequenceLength}
+                    dimension={dimension}
+                    selectedIndex={validSelectedIndex}
+                    attentionWeights={retrievalResult.transformerAttention}
+                  />
 
-              <PanelBDH
-                bdhState={bdhState}
-                sequenceLength={sequenceLength}
-                decayLambda={decayLambda}
-                dimension={dimension}
-                selectedIndex={validSelectedIndex}
-              />
-            </section>
+                  <PanelBDH
+                    bdhState={bdhState}
+                    sequenceLength={sequenceLength}
+                    decayLambda={decayLambda}
+                    dimension={dimension}
+                    selectedIndex={validSelectedIndex}
+                  />
+                </section>
 
-            <TestBench
-              tokens={tokens}
-              selectedIndex={validSelectedIndex}
-              setSelectedIndex={setSelectedIndex}
-              result={retrievalResult}
-              decayLambda={decayLambda}
-            />
+                <TestBench
+                  tokens={tokens}
+                  selectedIndex={validSelectedIndex}
+                  setSelectedIndex={setSelectedIndex}
+                  result={retrievalResult}
+                  decayLambda={decayLambda}
+                />
 
-            <RecallDecayCurve
-              tokens={tokens}
-              transformerState={transformerState}
-              bdhState={bdhState}
-              decayLambda={decayLambda}
-              selectedIndex={validSelectedIndex}
-              setSelectedIndex={setSelectedIndex}
-            />
-          </div>
-        )}
+                <RecallDecayCurve
+                  tokens={tokens}
+                  transformerState={transformerState}
+                  bdhState={bdhState}
+                  decayLambda={decayLambda}
+                  selectedIndex={validSelectedIndex}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              </div>
+            )}
 
-        {/* MODE 4: 1,000,000 Token Stress Simulator */}
-        {viewMode === 'stress' && (
-          <div className="space-y-8 animate-in fade-in duration-200">
-            <StressSimulator />
-            <GuidedLesson />
+            {/* ---------------- Tab: 3D animations ---------------- */}
+            {labTab === '3d' && (
+              <div className="space-y-8">
+                <Model3DSimulator />
+              </div>
+            )}
+
+            {/* ---------------- Tab: Extreme scale ---------------- */}
+            {labTab === 'stress' && (
+              <div className="space-y-8">
+                <StressSimulator />
+              </div>
+            )}
+
+            {/* ---------------- Tab: Theory, lesson & quiz ---------------- */}
+            {labTab === 'theory' && (
+              <div className="space-y-8">
+                <GuidedLesson />
+                <StepByStepToyModel decayLambda={decayLambda} />
+                <Class10Explainer />
+              </div>
+            )}
           </div>
         )}
       </main>
@@ -256,7 +290,7 @@ export function App() {
             <span>DataForge 2026 Pathway Track Submission</span>
           </div>
           <div>
-            Built with React, Tailwind CSS & Lucide Icons. Pure 100% Client-Side Simulation.
+            Built with React, Tailwind CSS &amp; Lucide Icons. Pure 100% Client-Side Simulation.
           </div>
           <div className="text-slate-500 font-mono text-[11px]">
             Pathway Post-Transformer Architecture Series (BDH)
