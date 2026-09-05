@@ -35,11 +35,19 @@ export const GuidedLesson: React.FC = () => {
           <p>
             Instead of adding new pages to a notebook, <strong className="text-pink-300">Pathway Dragon Hatchling (BDH)</strong> works like tuning a fixed set of <strong>piano strings</strong> (synaptic weights matrix $W$).
           </p>
-          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 font-mono text-xs text-pink-200">
-            {"W_t = λ * W_{t-1} + key * value^T"}
+          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 font-mono text-sm text-pink-200 flex items-center gap-1 flex-wrap">
+            <span className="text-pink-300 font-bold">W<sub>t</sub></span>
+            <span className="text-slate-400">=</span>
+            <span className="text-yellow-300">λ</span>
+            <span className="text-slate-400">·</span>
+            <span className="text-pink-300">W<sub>t-1</sub></span>
+            <span className="text-slate-400">+</span>
+            <span className="text-cyan-300">key</span>
+            <span className="text-slate-400">·</span>
+            <span className="text-green-300">value<sup>T</sup></span>
           </div>
           <p>
-            Every time a new token arrives, BDH gently adjusts the tension of the piano strings ($W_t$). The size of the piano <em>never grows</em>—it is always a fixed $D \times D$ grid! Over time, older sounds gently fade away ($\lambda$), making room for new notes.
+            Every time a new token arrives, BDH gently adjusts the tension of the piano strings (<strong className="text-pink-300">W<sub>t</sub></strong>). The size of the piano <em>never grows</em>—it is always a fixed <strong className="text-yellow-300">D × D</strong> grid! Over time, older sounds gently fade away (<strong className="text-yellow-300">λ</strong>), making room for new notes.
           </p>
         </div>
       ),

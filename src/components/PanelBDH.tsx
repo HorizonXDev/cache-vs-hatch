@@ -1,5 +1,5 @@
 import React from 'react';
-import { Network, Zap, ShieldCheck, Flame } from 'lucide-react';
+import { Zap, ShieldCheck, Flame, Trophy } from 'lucide-react';
 import type { BDHState } from '../types/simulation';
 import { formatBytes } from '../utils/mathEngine';
 
@@ -35,21 +35,40 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
       <div>
         <div className="flex items-center justify-between border-b border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-lg bg-pink-500/10 text-pink-400 border border-pink-500/30">
-              <Network className="w-5 h-5" />
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <Trophy className="w-5 h-5 text-emerald-400" />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                Pathway Dragon Hatchling (BDH)
-              </h2>
+              <div className="flex items-center gap-1.5">
+                <h2 className="text-base sm:text-lg font-bold text-white">
+                  Pathway Dragon Hatchling (BDH)
+                </h2>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500 text-slate-950">
+                  ARCHITECTURAL WINNER
+                </span>
+              </div>
               <p className="text-xs text-slate-400">Stores relationships in a fixed synaptic weight matrix</p>
             </div>
           </div>
-          <span className="px-2.5 py-1 rounded font-mono text-xs font-bold bg-pink-950 text-pink-400 border border-pink-800/60">
+          <span className="px-2.5 py-1 rounded font-mono text-xs font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
             Scaling: O(1) Constant
           </span>
         </div>
 
+        {/* Winner Highlights Banner */}
+        <div className="mt-3 grid grid-cols-3 gap-2 text-[10px] font-mono">
+          <div className="p-2 rounded bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-center font-semibold">
+            🟢 99.9% VRAM Savings
+          </div>
+          <div className="p-2 rounded bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-center font-semibold">
+            ⚡ Constant O(1) Speed
+          </div>
+          <div className="p-2 rounded bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-center font-semibold">
+            ♾️ Infinite Streaming
+          </div>
+        </div>
+
+        {/* Fixed Synaptic Matrix Grid Visualizer */}
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-300">
             <span className="font-semibold flex items-center gap-1.5">
