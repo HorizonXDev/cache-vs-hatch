@@ -100,17 +100,38 @@ export function App() {
     setSeed((prev) => prev + 1);
   };
 
-  // Smoothly jump back to the top when switching between the two major views,
-  // so you never land mid-page after navigating from a long landing / lab.
+  // Smoothly jump back to the very top when returning to the simple explainer.
   const scrollToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
+  // Align an element's top edge just below the sticky header.
+  const scrollBelowHeader = (el: HTMLElement) => {
+    const header = document.querySelector('header');
+    const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+    const target = el.getBoundingClientRect().top + window.scrollY - headerBottom - 16;
+    window.scrollTo({ top: Math.max(target, 0), left: 0, behavior: 'smooth' });
+  };
+
+  // When opening the lab, land on the lab's own header ("Full simulator & deep dive")
+  // instead of the top of the page — so the claim box stays out of the way.
+  const scrollToLabHeader = () => {
+    // Wait one frame so React has committed the lab view before measuring.
+    requestAnimationFrame(() => {
+      const labEl = document.getElementById('technical-lab');
+      if (labEl) {
+        scrollBelowHeader(labEl);
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      }
+    });
   };
 
   // Open the technical lab (optionally on a specific tab)
   const openLab = (tab: LabTab = 'simulator') => {
     setLabTab(tab);
     setShowLab(true);
-    scrollToTop();
+    scrollToLabHeader();
   };
 
   // Return to the simple explainer landing
@@ -188,7 +209,10 @@ export function App() {
           <LandingStory onOpenLab={() => openLab('simulator')} />
         ) : (
           /* ---------------- TECHNICAL LAB ---------------- */
-          <div className="space-y-12 sm:space-y-14 animate-in fade-in duration-200">
+          <div
+            id="technical-lab"
+            className="space-y-12 sm:space-y-14 animate-in fade-in duration-200"
+          >
             {/* Lab header */}
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-6 border-b border-slate-800">
               <div className="max-w-3xl">
