@@ -1,5 +1,7 @@
 # 🧠 BDH vs. KV Caching — Synaptic Short-Term Memory Simulator
 
+<p align="center"><img src="public/app.png" alt="BDH vs. KV Caching logo" width="150"></p>
+
 > **DataForge 2026 · Pathway Track — Post-Transformer Frontiers**
 > An interactive educational sandbox that compares how a **Standard Transformer** (with its KV Cache) and **Pathway's Dragon Hatchling (BDH)** architecture each solve the problem of *how an AI remembers what it has already processed*.
 
