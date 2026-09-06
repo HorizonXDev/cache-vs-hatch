@@ -120,7 +120,7 @@ A persistent amber banner directly under the header — required for hackathon h
 
 #### Footer
 - "DataForge 2026 Pathway Track Submission"
-- "Built with React, Tailwind CSS & Lucide Icons. Pure 100% Client-Side Simulation."
+- "🚀 Developed by Team Horizon ✨" (animated footer credit)
 - "Pathway Post-Transformer Architecture Series (BDH)"
 
 ---

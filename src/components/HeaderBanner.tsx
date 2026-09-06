@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Cpu, Info, Target, GraduationCap, Sparkles, BookOpen, FlaskConical } from 'lucide-react';
+import { ChevronDown, ChevronUp, Info, Target, GraduationCap, Sparkles, BookOpen, FlaskConical } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -35,8 +35,21 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = ({
             </div>
 
             <h1 className="text-lg sm:text-2xl xl:text-[1.7rem] font-extrabold tracking-tight text-white mt-2.5 sm:mt-3 flex items-center gap-2.5 sm:gap-3">
-              <div className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-2xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 shadow-lg shadow-cyan-500/20 shrink-0">
-                <Cpu className="w-4.5 h-4.5 sm:w-6 sm:h-6 text-cyan-400" />
+              <div className="p-1 sm:p-1.5 rounded-lg sm:rounded-xl bg-cyan-950/80 border border-cyan-500/40 shadow-lg shadow-cyan-500/20 shrink-0">
+                {/* Memory-duality mark: the growing KV "notebook" stack (left, cyan)
+                    vs the fixed O(1) BDH synapse ring (right, purple). */}
+                <svg viewBox="0 0 48 48" className="w-7 h-7 sm:w-9 sm:h-9" fill="none" aria-hidden="true">
+                  {/* KV cache: pages piling up (oldest dimmest at the top) */}
+                  <rect x="5.5" y="27.6" width="14" height="5" rx="2.5" fill="#22d3ee" />
+                  <rect x="5.5" y="21.7" width="14" height="5" rx="2.5" fill="#22d3ee" opacity="0.72" />
+                  <rect x="5.5" y="15.8" width="14" height="5" rx="2.5" fill="#22d3ee" opacity="0.42" />
+                  {/* BDH: one fixed synaptic unit with an active node */}
+                  <circle cx="33.2" cy="19.8" r="9" stroke="#a78bfa" strokeWidth="2.7" />
+                  <circle cx="33.2" cy="19.8" r="3" fill="#f0abfc" />
+                  {/* the trade-off: memory that grows -> feeds into the fixed unit */}
+                  <line x1="22" y1="30.1" x2="29.4" y2="27.2" stroke="#22d3ee" strokeWidth="1.6" strokeLinecap="round" opacity="0.7" />
+                  <circle cx="30.4" cy="26.7" r="1.6" fill="#f0abfc" />
+                </svg>
               </div>
               <span className="min-w-0">
                 BDH vs. KV Caching:{' '}
