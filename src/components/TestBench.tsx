@@ -20,18 +20,18 @@ export const TestBench: React.FC<TestBenchProps> = ({
   const { queryToken, targetValue, transformerOutput, transformerAccuracy, bdhOutput, bdhAccuracy, decayFactor, interferenceMagnitude } = result;
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-6 backdrop-blur-sm">
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-7 backdrop-blur-sm">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/80 pb-4 gap-2">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-md shadow-emerald-500/10">
-            <Target className="w-6 h-6 text-emerald-400" />
+      <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between border-b border-slate-800/80 pb-6 gap-4">
+        <div className="flex items-center gap-4">
+          <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-md shadow-emerald-500/10 shrink-0">
+            <Target className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-400" />
           </div>
           <div>
-            <h2 className="text-lg font-extrabold text-white flex items-center gap-2">
-              Interactive Test Bench (Ground Truth vs. Model Estimate)
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+              Interactive Test Bench
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400 mt-1">
               Select any historical token to query both models and compare key-value recall accuracy
             </p>
           </div>
@@ -62,7 +62,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedIndex(idx)}
-                className={`shrink-0 px-3.5 py-2.5 rounded-xl border text-xs font-medium transition-all flex flex-col items-center gap-1 shadow-md ${
+                className={`shrink-0 px-4 py-3 rounded-xl border text-xs sm:text-sm font-medium transition-all flex flex-col items-center gap-1.5 shadow-md ${
                   isSelected
                     ? 'bg-gradient-to-b from-cyan-950 to-slate-950 text-white border-cyan-400 shadow-lg shadow-cyan-950/60 scale-105 ring-2 ring-cyan-500/40'
                     : 'bg-slate-950/80 hover:bg-slate-800/80 text-slate-300 border-slate-800/80 hover:border-slate-700'
@@ -80,11 +80,11 @@ export const TestBench: React.FC<TestBenchProps> = ({
       </div>
 
       {/* Side-By-Side Comparison Grid: Truth Beside Estimate */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: Ground Truth Target Vector */}
         <motion.div
           whileHover={{ y: -2 }}
-          className="bg-slate-950/90 p-4 sm:p-5 rounded-2xl border border-slate-800/90 space-y-3.5 shadow-lg"
+          className="bg-slate-950/90 p-5 sm:p-6 rounded-3xl border border-slate-800/90 space-y-4 shadow-xl"
         >
           <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
             <span className="text-xs font-bold text-slate-200 flex items-center gap-2">
@@ -115,7 +115,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
         {/* Card 2: Transformer Retrieved Output */}
         <motion.div
           whileHover={{ y: -2 }}
-          className="bg-slate-950/90 p-4 sm:p-5 rounded-2xl border border-cyan-900/40 space-y-3.5 shadow-lg"
+          className="bg-slate-950/90 p-5 sm:p-6 rounded-3xl border border-cyan-900/40 space-y-4 shadow-xl"
         >
           <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
             <span className="text-xs font-bold text-cyan-300 flex items-center gap-2">
@@ -162,7 +162,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
         {/* Card 3: BDH Retrieved Output */}
         <motion.div
           whileHover={{ y: -2 }}
-          className="bg-slate-950/90 p-4 sm:p-5 rounded-2xl border border-pink-900/40 space-y-3.5 shadow-lg"
+          className="bg-slate-950/90 p-5 sm:p-6 rounded-3xl border border-pink-900/40 space-y-4 shadow-xl"
         >
           <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
             <span className="text-xs font-bold text-pink-300 flex items-center gap-2">

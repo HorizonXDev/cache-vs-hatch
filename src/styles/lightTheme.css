@@ -520,3 +520,31 @@ html.light .font-mono {
 html.light svg text {
   fill: #475569 !important;
 }
+
+/* --------------------------------------------------------------------------
+   9. HEADER VIEW SWITCHER (SIMPLE EXPLAINER / TECHNICAL LAB)
+   --------------------------------------------------------------------------
+   Idle (non-selected) switcher buttons: force dark ink + a soft outline so
+   they never render pale-on-white in light mode. The *selected* button uses
+   a solid cyan/purple pill with white labels; the existing
+   `button[class*="bg-cyan-600"] *` / `button[class*="bg-purple-600"] *`
+   rules above already keep those labels white in light mode, so nothing is
+   needed here for the active state.
+   -------------------------------------------------------------------------- */
+html.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+html.light .switcher-button:not([aria-current="page"]) {
+  color: #1e293b !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light .switcher-button:not([aria-current="page"]) svg {
+  color: #475569 !important;
+}
+
+html.light .switcher-button:not([aria-current="page"]):hover {
+  color: #0f172a !important;
+}
+

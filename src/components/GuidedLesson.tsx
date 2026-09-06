@@ -105,7 +105,7 @@ export const GuidedLesson: React.FC = () => {
   ];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-5 backdrop-blur-sm">
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-7 backdrop-blur-sm">
       {/* Navigation Tabs */}
       <div className="flex items-center justify-between border-b border-slate-800/80 pb-3.5">
         <div className="flex items-center gap-2">

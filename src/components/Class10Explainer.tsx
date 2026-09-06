@@ -62,7 +62,7 @@ export const Class10Explainer: React.FC = () => {
         {/* Metaphor 1: The Backpack vs The Mind */}
         <motion.div
           whileHover={{ y: -3 }}
-          className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 sm:p-6 shadow-xl space-y-3.5 backdrop-blur-sm"
+          className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-xl space-y-4 backdrop-blur-sm"
         >
           <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm border-b border-slate-800/80 pb-2.5">
             <BookOpen className="w-4 h-4 text-cyan-400" />
@@ -84,7 +84,7 @@ export const Class10Explainer: React.FC = () => {
         {/* Metaphor 2: The 100 Light Switches */}
         <motion.div
           whileHover={{ y: -3 }}
-          className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 sm:p-6 shadow-xl space-y-3.5 backdrop-blur-sm"
+          className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-xl space-y-4 backdrop-blur-sm"
         >
           <div className="flex items-center gap-2 text-pink-400 font-bold text-sm border-b border-slate-800/80 pb-2.5">
             <Lightbulb className="w-4 h-4 text-pink-400" />
@@ -105,7 +105,7 @@ export const Class10Explainer: React.FC = () => {
       </div>
 
       {/* Interactive 3-Question AI Mini-Quiz */}
-      <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-6 backdrop-blur-sm">
+      <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-7 backdrop-blur-sm">
         <div className="flex items-center justify-between border-b border-slate-800/80 pb-3.5">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 shadow-md shadow-yellow-500/10">

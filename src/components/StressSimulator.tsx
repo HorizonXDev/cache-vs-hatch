@@ -24,18 +24,18 @@ export const StressSimulator: React.FC = () => {
   const bdhSpeed = 250;
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-6 backdrop-blur-sm">
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-7 backdrop-blur-sm">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800/80 pb-3.5 gap-2">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/30 shadow-md shadow-pink-500/10">
-            <Flame className="w-6 h-6 text-pink-400 animate-pulse" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800/80 pb-5 gap-3">
+        <div className="flex items-center gap-4">
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/30 shadow-md shadow-pink-500/10">
+            <Flame className="w-6 h-6 sm:w-7 sm:h-7 text-pink-400 animate-pulse" />
           </div>
           <div>
-            <h2 className="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
-              Extreme Context &amp; VRAM Stress Simulator (N = 1,000 … 1,000,000)
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white flex items-center gap-2">
+              Extreme Context &amp; VRAM Stress Simulator
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400 mt-1">
               Drag the sequence length slider to observe Transformer KV Cache overflow while BDH remains flat!
             </p>
           </div>

@@ -45,7 +45,7 @@ export const StepByStepToyModel: React.FC<StepByStepToyModelProps> = ({ decayLam
   const state = history[currentStep] || history[0];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-6 backdrop-blur-sm">
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-7 backdrop-blur-sm">
       {/* Header Banner */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b border-slate-800/80 pb-4 gap-3">
         <div>
@@ -58,10 +58,10 @@ export const StepByStepToyModel: React.FC<StepByStepToyModelProps> = ({ decayLam
               N=5 Tokens | D=4 Grid
             </span>
           </div>
-          <h2 className="text-lg font-extrabold text-white mt-1.5 flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-2 flex items-center gap-2">
             Step-by-Step Memory Write Simulator
           </h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Step through token by token to watch how memory matrices change in real time!
           </p>
         </div>

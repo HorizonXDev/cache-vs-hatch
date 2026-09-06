@@ -58,17 +58,17 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
   const activePoint = hoverIdx !== null ? points[hoverIdx] : points[selectedIndex];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4 backdrop-blur-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/80 pb-3.5 gap-2">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 shadow-md shadow-indigo-500/10">
-            <LineChart className="w-6 h-6 text-indigo-400" />
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5 backdrop-blur-sm">
+      <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between border-b border-slate-800/80 pb-5 gap-4">
+        <div className="flex items-center gap-4">
+          <div className="p-3 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 shadow-md shadow-indigo-500/10 shrink-0">
+            <LineChart className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400" />
           </div>
           <div>
-            <h2 className="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
-              Analytical Recall Decay Curve vs Token Position
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+              Analytical Recall Decay Curve
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400 mt-1">
               Comparing linear O(N) KV Cache recall vs fixed O(1) BDH synaptic decay (λ = {decayLambda.toFixed(2)})
             </p>
           </div>
@@ -84,7 +84,7 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
         </div>
       </div>
 
-      <div className="relative bg-slate-950/90 p-3 rounded-2xl border border-slate-800/90 shadow-inner">
+      <div className="relative bg-slate-950/90 p-4 sm:p-6 rounded-3xl border border-slate-800/90 shadow-inner">
         <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto overflow-visible">
           <defs>
             <linearGradient id="transGrad" x1="0" y1="0" x2="0" y2="1">
@@ -186,7 +186,7 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
         <motion.div
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between text-xs space-y-2 sm:space-y-0 shadow-lg"
+          className="p-4 sm:p-5 rounded-2xl bg-slate-950/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between text-xs sm:text-sm space-y-3 sm:space-y-0 shadow-xl gap-3"
         >
           <div className="flex items-center gap-2.5">
             <span className="text-xl">{activePoint.token.emoji}</span>

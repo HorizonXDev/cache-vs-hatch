@@ -315,7 +315,7 @@ export const Model3DSimulator: React.FC = () => {
   }, [activeStep, tokens]);
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4 backdrop-blur-sm">
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 backdrop-blur-sm">
       {/* Header Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800/80 pb-3.5 gap-3">
         <div className="flex items-center gap-3">

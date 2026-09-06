@@ -34,24 +34,24 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 flex flex-col justify-between shadow-2xl space-y-4 backdrop-blur-sm"
+      className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xl space-y-6 backdrop-blur-sm"
     >
       <div>
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-3.5">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+          <div className="flex items-center gap-3.5">
             <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-md shadow-emerald-500/10">
-              <Trophy className="w-6 h-6 text-emerald-400" />
+              <Trophy className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-400" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base sm:text-lg font-extrabold text-white">
+                <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-white">
                   Pathway Dragon Hatchling (BDH)
                 </h2>
                 <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-500 text-slate-950 shadow-sm shadow-emerald-500/30">
                   ARCHITECTURAL WINNER
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Stores relationships in a fixed synaptic weight matrix</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Stores relationships in a fixed synaptic weight matrix</p>
             </div>
           </div>
           <span className="px-3 py-1 rounded-full font-mono text-xs font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40 shadow-sm">
@@ -60,21 +60,21 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
         </div>
 
         {/* Winner Highlights Banner */}
-        <div className="mt-3.5 grid grid-cols-3 gap-2 text-[10px] font-mono">
-          <div className="p-2 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-center font-semibold shadow-sm">
+        <div className="mt-4 grid grid-cols-3 gap-2.5 text-[11px] sm:text-xs font-mono">
+          <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-center font-semibold shadow-sm">
             🟢 99.9% VRAM Savings
           </div>
-          <div className="p-2 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-center font-semibold shadow-sm">
+          <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-center font-semibold shadow-sm">
             ⚡ Constant O(1) Speed
           </div>
-          <div className="p-2 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-center font-semibold shadow-sm">
+          <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-center font-semibold shadow-sm">
             ♾️ Infinite Streaming
           </div>
         </div>
 
         {/* Fixed Synaptic Matrix Grid Visualizer */}
-        <div className="mt-4 space-y-2.5">
-          <div className="flex items-center justify-between text-xs text-slate-300 font-semibold">
+        <div className="mt-5 space-y-3">
+          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-300 font-semibold">
             <span className="flex items-center gap-1.5">
               <Flame className="w-4 h-4 text-pink-400" />
               Fixed Fast-Weight Matrix [W_t ∈ ℝ^(D×D)]
@@ -84,8 +84,8 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
             </span>
           </div>
 
-          <div className="bg-slate-950/90 p-3.5 rounded-2xl border border-slate-800/90 space-y-2.5 shadow-inner">
-            <div className="flex justify-between items-center text-[11px] font-mono text-slate-400">
+          <div className="bg-slate-950/90 p-4 rounded-2xl border border-slate-800/90 space-y-3 shadow-inner">
+            <div className="flex justify-between items-center text-xs font-mono text-slate-400">
               <span>Hebbian Synaptic Strength heatmap (λ={decayLambda.toFixed(2)})</span>
               <span>N={sequenceLength} sequence tokens processed</span>
             </div>
@@ -125,7 +125,7 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
               )}
             </div>
 
-            <div className="flex justify-between items-center text-[10px] text-slate-400 font-mono pt-1">
+            <div className="flex justify-between items-center text-[11px] text-slate-400 font-mono pt-1.5">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-pink-500" /> Positive Weight
               </span>
@@ -140,10 +140,10 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
         </div>
       </div>
 
-      <div className="bg-slate-950/90 p-4 rounded-2xl border border-slate-800/90 space-y-3.5 shadow-inner">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-            <Zap className="w-4 h-4 text-pink-400" />
+      <div className="bg-slate-950/90 p-5 rounded-2xl border border-slate-800/90 space-y-4 shadow-inner">
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-xs sm:text-sm font-semibold text-slate-300 flex items-center gap-2">
+            <Zap className="w-4.5 h-4.5 text-pink-400" />
             Sparse Non-Negative Activation Renderer (~5% Target)
           </span>
           <span className="px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold bg-pink-950 text-pink-300 border border-pink-500/30">
@@ -172,19 +172,19 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 text-xs">
-          <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800/80 font-mono">
-            <div className="text-slate-500 text-[10px]">State Matrix Footprint</div>
+        <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm">
+          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800/80 font-mono">
+            <div className="text-slate-500 text-[11px]">State Matrix Footprint</div>
             <div className="text-pink-300 font-bold text-sm mt-0.5">{formatBytes(toyBDHVRAM)}</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800/80 font-mono">
-            <div className="text-slate-500 text-[10px]">Growth with Length N</div>
+          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800/80 font-mono">
+            <div className="text-slate-500 text-[11px]">Growth with Length N</div>
             <div className="text-emerald-400 font-bold text-sm mt-0.5">0 Bytes (Constant O(1))</div>
           </div>
         </div>
       </div>
 
-      <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-800/50 flex items-start gap-2.5 text-xs text-emerald-200 shadow-md">
+      <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/40 border border-emerald-800/50 flex items-start gap-3 text-[13px] leading-relaxed text-emerald-200 shadow-md">
         <ShieldCheck className="w-4.5 h-4.5 text-emerald-400 shrink-0 mt-0.5" />
         <div>
           <span className="font-bold text-emerald-300">Bounded O(1) Memory Footprint: </span>

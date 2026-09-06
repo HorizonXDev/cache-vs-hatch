@@ -13,11 +13,106 @@ html.theme-switching * {
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-sans);
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv02", "cv03", "cv11";
+    letter-spacing: -0.011em;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Visible, on-brand focus ring everywhere (a11y + judges on keyboard demos) */
+  :focus-visible {
+    outline: 2px solid rgba(34, 211, 238, 0.9);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Balanced heading wraps: no lonely orphan words on display headlines */
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   AMBIENT BACKGROUND — soft animated light orbs that sit behind the page so
+   long empty space still feels alive. Colors are themed (dark & light).
+   ------------------------------------------------------------------------- */
+:root,
+html:not(.light) {
+  --orb-a: rgba(6, 182, 212, 0.20);
+  --orb-b: rgba(139, 92, 246, 0.17);
+  --orb-c: rgba(236, 72, 153, 0.13);
+}
+
+html.light {
+  --orb-a: rgba(2, 132, 199, 0.14);
+  --orb-b: rgba(109, 40, 217, 0.11);
+  --orb-c: rgba(219, 39, 119, 0.09);
+}
+
+.ambient-lights .orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.ambient-lights .orb-a {
+  top: -18vw;
+  left: -10vw;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle at center, var(--orb-a), transparent 62%);
+  animation: orb-drift-a 34s ease-in-out infinite alternate;
+}
+
+.ambient-lights .orb-b {
+  top: 8vh;
+  right: -14vw;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle at center, var(--orb-b), transparent 62%);
+  animation: orb-drift-b 42s ease-in-out infinite alternate;
+}
+
+.ambient-lights .orb-c {
+  bottom: -20vw;
+  left: 24vw;
+  width: 58vw;
+  height: 58vw;
+  background: radial-gradient(circle at center, var(--orb-c), transparent 62%);
+  animation: orb-drift-c 50s ease-in-out infinite alternate;
+}
+
+@keyframes orb-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(6vw, 8vh, 0) scale(1.15); }
+}
+
+@keyframes orb-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to   { transform: translate3d(-5vw, 10vh, 0) scale(0.95); }
+}
+
+@keyframes orb-drift-c {
+  from { transform: translate3d(0, 0, 0) scale(0.95); }
+  to   { transform: translate3d(-8vw, -7vh, 0) scale(1.1); }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-lights .orb {
+    animation: none;
   }
 }
 
@@ -60,4 +155,3 @@ html.theme-switching * {
 .animate-pulse-ring {
   animation: pulse-ring 2.5s ease-in-out infinite;
 }
-
