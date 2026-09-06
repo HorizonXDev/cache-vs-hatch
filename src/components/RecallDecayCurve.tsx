@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { LineChart } from 'lucide-react';
+import { LineChart, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import type { SimulationToken, TransformerState, BDHState } from '../types/simulation';
 import { queryModels } from '../utils/mathEngine';
 
@@ -35,11 +36,11 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
 
   const N = tokens.length;
   const svgWidth = 800;
-  const svgHeight = 220;
+  const svgHeight = 240;
   const paddingLeft = 45;
-  const paddingRight = 20;
+  const paddingRight = 25;
   const paddingTop = 20;
-  const paddingBottom = 35;
+  const paddingBottom = 40;
 
   const plotWidth = svgWidth - paddingLeft - paddingRight;
   const plotHeight = svgHeight - paddingTop - paddingBottom;
@@ -50,17 +51,21 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
   const transPointsStr = points.map((p) => `${getX(p.idx)},${getY(p.transAcc)}`).join(' ');
   const bdhPointsStr = points.map((p) => `${getX(p.idx)},${getY(p.bdhAcc)}`).join(' ');
 
+  // Gradient area paths
+  const transAreaPath = `${transPointsStr} L ${getX(N - 1)},${paddingTop + plotHeight} L ${getX(0)},${paddingTop + plotHeight} Z`;
+  const bdhAreaPath = `${bdhPointsStr} L ${getX(N - 1)},${paddingTop + plotHeight} L ${getX(0)},${paddingTop + plotHeight} Z`;
+
   const activePoint = hoverIdx !== null ? points[hoverIdx] : points[selectedIndex];
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-5 shadow-xl space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800 pb-3 gap-2">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
-            <LineChart className="w-5 h-5" />
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4 backdrop-blur-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/80 pb-3.5 gap-2">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 shadow-md shadow-indigo-500/10">
+            <LineChart className="w-6 h-6 text-indigo-400" />
           </div>
           <div>
-            <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+            <h2 className="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
               Analytical Recall Decay Curve vs Token Position
             </h2>
             <p className="text-xs text-slate-400">
@@ -70,17 +75,28 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
         </div>
 
         <div className="flex items-center gap-4 text-xs font-mono">
-          <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
-            <span className="w-3 h-0.5 bg-cyan-400 rounded" /> Transformer (100% Flat)
+          <span className="flex items-center gap-2 text-cyan-300 font-semibold bg-cyan-950/60 px-2.5 py-1 rounded-lg border border-cyan-500/30">
+            <span className="w-3 h-1 bg-cyan-400 rounded-full" /> Transformer (100% Flat)
           </span>
-          <span className="flex items-center gap-1.5 text-pink-400 font-semibold">
-            <span className="w-3 h-0.5 bg-pink-500 rounded" /> BDH Synaptic Decay Curve
+          <span className="flex items-center gap-2 text-pink-300 font-semibold bg-pink-950/60 px-2.5 py-1 rounded-lg border border-pink-500/30">
+            <span className="w-3 h-1 bg-pink-500 rounded-full" /> BDH Synaptic Decay
           </span>
         </div>
       </div>
 
-      <div className="relative bg-slate-950 p-2 rounded-xl border border-slate-800">
+      <div className="relative bg-slate-950/90 p-3 rounded-2xl border border-slate-800/90 shadow-inner">
         <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto overflow-visible">
+          <defs>
+            <linearGradient id="transGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.0" />
+            </linearGradient>
+            <linearGradient id="bdhGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.0" />
+            </linearGradient>
+          </defs>
+
           {[0, 25, 50, 75, 100].map((val) => {
             const y = getY(val);
             return (
@@ -108,6 +124,9 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
             );
           })}
 
+          <path d={transAreaPath} fill="url(#transGrad)" />
+          <path d={bdhAreaPath} fill="url(#bdhGrad)" />
+
           <polyline fill="none" stroke="#22d3ee" strokeWidth="2.5" points={transPointsStr} />
           <polyline fill="none" stroke="#ec4899" strokeWidth="2.5" points={bdhPointsStr} />
 
@@ -125,7 +144,7 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
                   cy={yTrans}
                   r={isSelected ? 5 : 3}
                   fill="#22d3ee"
-                  className="transition-all"
+                  className="transition-all duration-200"
                 />
 
                 <circle
@@ -135,7 +154,7 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
                   fill="#ec4899"
                   stroke={isSelected ? '#ffffff' : 'none'}
                   strokeWidth="1.5"
-                  className="transition-all"
+                  className="transition-all duration-200"
                 />
               </g>
             );
@@ -148,46 +167,54 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
               x2={getX(activePoint.idx)}
               y2={svgHeight - paddingBottom}
               stroke="#cbd5e1"
-              strokeWidth="1"
+              strokeWidth="1.5"
               strokeDasharray="3 3"
-              opacity="0.5"
+              opacity="0.6"
             />
           )}
 
-          <text x={paddingLeft} y={svgHeight - 10} fill="#64748b" fontSize="10" fontFamily="monospace">
+          <text x={paddingLeft} y={svgHeight - 12} fill="#64748b" fontSize="10" fontFamily="monospace">
             Position #1 (Oldest)
           </text>
-          <text x={svgWidth - paddingRight} y={svgHeight - 10} fill="#64748b" fontSize="10" fontFamily="monospace" textAnchor="end">
+          <text x={svgWidth - paddingRight} y={svgHeight - 12} fill="#64748b" fontSize="10" fontFamily="monospace" textAnchor="end">
             Position #{N} (Recent)
           </text>
         </svg>
       </div>
 
       {activePoint && (
-        <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between text-xs space-y-2 sm:space-y-0">
-          <div className="flex items-center gap-2">
-            <span className="text-base">{activePoint.token.emoji}</span>
-            <span className="font-semibold text-slate-200">
-              Token #{activePoint.idx + 1}: {activePoint.token.label}
-            </span>
-            <span className="text-slate-500 font-mono text-[11px]">
-              ({N - 1 - activePoint.idx} steps in past)
-            </span>
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between text-xs space-y-2 sm:space-y-0 shadow-lg"
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">{activePoint.token.emoji}</span>
+            <div>
+              <div className="font-bold text-slate-100 flex items-center gap-2">
+                <span>Token #{activePoint.idx + 1}: {activePoint.token.label}</span>
+                <span className="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded">
+                  {N - 1 - activePoint.idx} steps in past
+                </span>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center gap-4 font-mono">
-            <div className="text-cyan-400">
+            <div className="text-cyan-300 bg-cyan-950/40 px-2.5 py-1 rounded-lg border border-cyan-500/20">
               Transformer: <span className="font-bold">{activePoint.transAcc.toFixed(1)}%</span>
             </div>
-            <div className="text-pink-400">
+            <div className="text-pink-300 bg-pink-950/40 px-2.5 py-1 rounded-lg border border-pink-500/20">
               BDH Recall: <span className="font-bold">{activePoint.bdhAcc.toFixed(1)}%</span>
             </div>
-            <div className="text-slate-400 text-[11px]">
-              Theory λ^age: {(activePoint.decayFactor * 100).toFixed(1)}%
+            <div className="text-slate-300 text-[11px] flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-yellow-400" />
+              <span>λ^age: {(activePoint.decayFactor * 100).toFixed(1)}%</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );
 };
+

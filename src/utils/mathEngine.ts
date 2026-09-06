@@ -24,18 +24,36 @@ const TOKEN_POOL = [
 ];
 
 /**
- * Generate a random normalized vector of size D
+ * Deterministic PRNG (mulberry32) so a given seed always produces the same
+ * token vectors. This lets the "Regenerate" buttons meaningfully consume
+ * the seed state instead of relying on Math.random().
  */
-export function generateRandomUnitVector(dim: number): number[] {
-  const vec = Array.from({ length: dim }, () => (Math.random() - 0.5) * 2);
+export function createSeededRandom(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Generate a random normalized vector of size D (optionally seeded)
+ */
+export function generateRandomUnitVector(dim: number, rand: () => number = Math.random): number[] {
+  const vec = Array.from({ length: dim }, () => (rand() - 0.5) * 2);
   const norm = Math.sqrt(vec.reduce((sum, x) => sum + x * x, 0)) || 1;
   return vec.map((x) => x / norm);
 }
 
 /**
- * Generate a sequence of N tokens with associated Key and Value vectors of dimension D
+ * Generate a sequence of N tokens with associated Key and Value vectors of dimension D.
+ * Passing a seed makes the sequence deterministic (same seed -> same vectors).
  */
-export function generateTokenSequence(sequenceLength: number, dim: number): SimulationToken[] {
+export function generateTokenSequence(sequenceLength: number, dim: number, seed: number = 42): SimulationToken[] {
+  const rand = createSeededRandom(seed);
   const tokens: SimulationToken[] = [];
   for (let i = 0; i < sequenceLength; i++) {
     const item = TOKEN_POOL[i % TOKEN_POOL.length];
@@ -47,8 +65,8 @@ export function generateTokenSequence(sequenceLength: number, dim: number): Simu
       label,
       emoji: item.emoji,
       color: item.color,
-      keyVector: generateRandomUnitVector(dim),
-      valueVector: generateRandomUnitVector(dim),
+      keyVector: generateRandomUnitVector(dim, rand),
+      valueVector: generateRandomUnitVector(dim, rand),
     });
   }
   return tokens;

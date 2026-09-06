@@ -1,8 +1,23 @@
 @import "tailwindcss";
+@import "./styles/darkTheme.css";
+@import "./styles/lightTheme.css";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Enable smooth transitions when toggling theme */
+html.theme-switching * {
+  transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out !important;
+}
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-black;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -11,24 +26,38 @@
   width: 6px;
   height: 6px;
 }
-::-webkit-scrollbar-track {
-  background: #090d16;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
 
 /* Glow effects for active synapses and nodes */
 .synapse-glow {
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.6);
+  box-shadow: 0 0 16px var(--synapse-glow-color, rgba(6, 182, 212, 0.5)), inset 0 0 8px var(--synapse-glow-color, rgba(6, 182, 212, 0.3));
 }
 .active-node-glow {
-  box-shadow: 0 0 15px rgba(244, 63, 94, 0.8);
+  box-shadow: 0 0 20px var(--node-glow-color, rgba(244, 63, 94, 0.7)), inset 0 0 10px var(--node-glow-color, rgba(244, 63, 94, 0.4));
 }
 .kv-cell-glow {
-  box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 14px var(--kv-glow-color, rgba(168, 85, 247, 0.5)), inset 0 0 6px var(--kv-glow-color, rgba(168, 85, 247, 0.3));
 }
+
+/* Shimmer gradient animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Pulse ring animation */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s ease-in-out infinite;
+}
+

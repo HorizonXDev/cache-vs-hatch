@@ -1,0 +1,498 @@
+/* ==========================================================================
+   LIGHT THEME STYLESHEET - FULL SCANNED & AUDITED
+   Provides a clean, high-contrast, immersive academic & lab UI when .light is active.
+   ========================================================================== */
+
+html.light {
+  /* Core Theme Design Tokens */
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-secondary: #f1f5f9;
+  --bg-card-subtle: #e2e8f0;
+  
+  --text-main: #0f172a;
+  --text-heading: #020617;
+  --text-muted: #334155;
+  --text-dim: #64748b;
+
+  --border-card: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-hover: #0284c7;
+
+  --mesh-cyan: rgba(2, 132, 199, 0.08);
+  --mesh-purple: rgba(147, 51, 234, 0.08);
+  --mesh-pink: rgba(219, 39, 119, 0.06);
+
+  --grid-line: rgba(148, 163, 184, 0.12);
+
+  --synapse-glow-color: rgba(2, 132, 199, 0.25);
+  --node-glow-color: rgba(225, 29, 72, 0.35);
+  --kv-glow-color: rgba(147, 51, 234, 0.25);
+
+  --chart-grid-color: rgba(203, 213, 225, 0.7);
+  --chart-axis-color: #475569;
+}
+
+/* Base Body Light Canvas */
+html.light body {
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
+  background-image: 
+    radial-gradient(at 0% 0%, var(--mesh-cyan) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, var(--mesh-purple) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, var(--mesh-pink) 0px, transparent 50%) !important;
+  background-attachment: fixed !important;
+}
+
+/* Light Mode Subtle Grid Pattern */
+html.light .bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px) !important;
+}
+
+/* Scrollbars in Light Mode */
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 3px;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* --------------------------------------------------------------------------
+   1. CARD & CONTAINER OVERRIDES
+   -------------------------------------------------------------------------- */
+html.light .bg-slate-950,
+html.light .bg-slate-950\/95,
+html.light .bg-slate-950\/90,
+html.light .bg-slate-950\/80,
+html.light .bg-slate-950\/70,
+html.light .bg-slate-950\/60,
+html.light .bg-slate-950\/50,
+html.light .bg-slate-950\/40,
+html.light .bg-slate-950\/25 {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+}
+
+html.light .bg-slate-900,
+html.light .bg-slate-900\/95,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900\/80,
+html.light .bg-slate-900\/70,
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/50 {
+  background-color: #f8fafc !important;
+  background-image: none !important;
+  box-shadow: 0 2px 10px -1px rgba(15, 23, 42, 0.04) !important;
+}
+
+html.light .bg-slate-800,
+html.light .bg-slate-800\/90,
+html.light .bg-slate-800\/80,
+html.light .bg-slate-800\/60,
+html.light .bg-slate-800\/50 {
+  background-color: #f1f5f9 !important;
+  background-image: none !important;
+}
+
+html.light .hover\:bg-slate-800\/90:hover,
+html.light .hover\:bg-slate-800\/80:hover,
+html.light .hover\:bg-slate-800\/60:hover,
+html.light .hover\:bg-slate-800:hover,
+html.light .hover\:bg-slate-700\/90:hover,
+html.light .hover\:bg-slate-700:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Neutralize Dark Container Gradients in Light Mode
+   NOTE: Tailwind v4 emits opacity-modifier tokens like `from-slate-900/90`,
+   so selectors must escape the slash (`\/`) — plain `.from-slate-900` would
+   NOT match `from-slate-900/90` and the container would stay dark while the
+   light theme forces its text dark (invisible text). */
+html.light .bg-gradient-to-b.from-slate-900,
+html.light .bg-gradient-to-b.from-slate-900\/90,
+html.light .bg-gradient-to-b.from-slate-900\/80,
+html.light .bg-gradient-to-b.from-slate-950,
+html.light .bg-gradient-to-b.from-slate-950\/90,
+html.light .bg-gradient-to-b.from-slate-950\/60,
+html.light .bg-gradient-to-b.from-indigo-950\/60,
+html.light .bg-gradient-to-r.from-cyan-950\/50 {
+  background-image: linear-gradient(to bottom, #ffffff, #f8fafc) !important;
+}
+
+/* StressSimulator "GPU VRAM OVERFLOW" card: replace the dark red/navy
+   gradient with a light red danger tint so the (dark) danger-colored text
+   stays readable in light mode. */
+html.light .bg-gradient-to-b.from-red-950\/60.to-slate-950 {
+  background-image: linear-gradient(to bottom, #fee2e2, #fef2f2) !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. BORDER OVERRIDES
+   -------------------------------------------------------------------------- */
+html.light .border-slate-800,
+html.light .border-slate-800\/90,
+html.light .border-slate-800\/80,
+html.light .border-slate-800\/60,
+html.light .border-slate-700,
+html.light .border-slate-700\/80,
+html.light .border-slate-700\/60 {
+  border-color: #e2e8f0 !important;
+}
+
+html.light .hover\:border-slate-700:hover,
+html.light .hover\:border-cyan-500\/50:hover,
+html.light .hover\:border-purple-500\/50:hover {
+  border-color: #0284c7 !important;
+}
+
+/* Progress Bar Tracks in Light Mode */
+html.light .bg-slate-900.rounded-full {
+  background-color: #e2e8f0 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. TEXT TYPOGRAPHY OVERRIDES
+   -------------------------------------------------------------------------- */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light .text-white:not(.btn-text-white),
+html.light .text-slate-100,
+html.light .text-slate-200 {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-300,
+html.light .text-slate-400 {
+  color: #334155 !important;
+}
+
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Ensure colored solid buttons & CTA buttons retain crisp white text */
+html.light button[class*="bg-cyan-600"] *,
+html.light button[class*="bg-cyan-500"] *,
+html.light button[class*="bg-purple-600"] *,
+html.light button[class*="bg-purple-500"] *,
+html.light button[class*="bg-pink-600"] *,
+html.light button[class*="bg-amber-600"] *,
+html.light button[class*="bg-emerald-600"] *,
+html.light button[class*="bg-indigo-600"] *,
+html.light a[class*="bg-cyan-600"] *,
+html.light .bg-gradient-to-r.from-cyan-600 * {
+  color: #ffffff !important;
+}
+
+/* Primary CTA Button: "Open the technical lab: full controls & real numbers" */
+html.light .bg-gradient-to-r.from-cyan-600.via-teal-600.to-cyan-500 {
+  background-image: linear-gradient(to right, #0284c7, #0d9488, #0284c7) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.4) !important;
+}
+html.light .bg-gradient-to-r.from-cyan-600.via-teal-600.to-cyan-500 * {
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. BRAND ACCENT & BADGE STYLES (Cyan, Purple, Pink, Amber, Emerald, Red)
+   -------------------------------------------------------------------------- */
+
+/* Cyan Elements (Transformers / Memory) */
+html.light .bg-cyan-950,
+html.light .bg-cyan-950\/90,
+html.light .bg-cyan-950\/80,
+html.light .bg-cyan-950\/60,
+html.light .bg-cyan-950\/50,
+html.light .bg-cyan-950\/40,
+html.light .bg-cyan-950\/20,
+html.light .bg-cyan-900\/40,
+html.light .bg-cyan-500\/20,
+html.light .bg-cyan-500\/10 {
+  background-color: #e0f2fe !important;
+}
+html.light .text-cyan-400,
+html.light .text-cyan-300,
+html.light .text-cyan-200,
+html.light .text-cyan-100,
+html.light .text-cyan-100\/90 {
+  color: #0284c7 !important;
+}
+html.light .border-cyan-500\/60,
+html.light .border-cyan-500\/50,
+html.light .border-cyan-500\/40,
+html.light .border-cyan-500\/30,
+html.light .border-cyan-500\/20,
+html.light .border-cyan-900\/40,
+html.light .border-cyan-900\/60 {
+  border-color: #7dd3fc !important;
+}
+
+/* Purple Elements (BDH Model / Synaptic Matrix / Cited Paper) */
+html.light .bg-purple-950,
+html.light .bg-purple-950\/90,
+html.light .bg-purple-950\/80,
+html.light .bg-purple-950\/60,
+html.light .bg-purple-950\/50,
+html.light .bg-purple-950\/40,
+html.light .bg-purple-950\/20,
+html.light .bg-purple-500\/20,
+html.light .bg-purple-500\/10 {
+  background-color: #f3e8ff !important;
+}
+html.light .text-purple-400,
+html.light .text-purple-300,
+html.light .text-purple-200 {
+  color: #7e22ce !important;
+}
+html.light .border-purple-500\/60,
+html.light .border-purple-500\/50,
+html.light .border-purple-500\/40,
+html.light .border-purple-500\/30,
+html.light .border-purple-500\/20 {
+  border-color: #c084fc !important;
+}
+
+/* Pink Elements (Hebbian Fast Weight / Sparse Activations) */
+html.light .bg-pink-950,
+html.light .bg-pink-950\/90,
+html.light .bg-pink-950\/80,
+html.light .bg-pink-950\/60,
+html.light .bg-pink-950\/40,
+html.light .bg-pink-950\/20,
+html.light .bg-pink-500\/20,
+html.light .bg-pink-500\/10 {
+  background-color: #fce7f3 !important;
+}
+html.light .text-pink-400,
+html.light .text-pink-300,
+html.light .text-pink-200 {
+  color: #be185d !important;
+}
+html.light .border-pink-500\/40,
+html.light .border-pink-500\/30,
+html.light .border-pink-500\/20,
+html.light .border-pink-900\/40,
+html.light .border-pink-900\/60 {
+  border-color: #f472b6 !important;
+}
+
+/* Amber/Yellow Warning Elements (O(1) Trade-Off, Interference) */
+html.light .bg-amber-950,
+html.light .bg-amber-950\/90,
+html.light .bg-amber-950\/70,
+html.light .bg-amber-950\/60,
+html.light .bg-amber-950\/40,
+html.light .bg-amber-950\/25,
+html.light .bg-amber-500\/20,
+html.light .bg-amber-500\/10 {
+  background-color: #fffbeb !important;
+}
+html.light .text-amber-400,
+html.light .text-amber-300,
+html.light .text-amber-200,
+html.light .text-amber-100\/90 {
+  color: #b45309 !important;
+}
+html.light .border-amber-900\/40,
+html.light .border-amber-800\/80,
+html.light .border-amber-800\/60,
+html.light .border-amber-800\/50,
+html.light .border-amber-500\/30,
+html.light .border-amber-500\/20 {
+  border-color: #fcd34d !important;
+}
+
+/* Emerald Accents (Success / High Accuracy / BDH Winner Card) */
+html.light .bg-emerald-950,
+html.light .bg-emerald-950\/90,
+html.light .bg-emerald-950\/80,
+html.light .bg-emerald-950\/70,
+html.light .bg-emerald-950\/60,
+html.light .bg-emerald-950\/20,
+html.light .bg-emerald-500\/20,
+html.light .bg-emerald-500\/10 {
+  background-color: #f0fdf4 !important;
+}
+html.light .text-emerald-400,
+html.light .text-emerald-300,
+html.light .text-emerald-200 {
+  color: #15803d !important;
+}
+html.light .border-emerald-500,
+html.light .border-emerald-500\/60,
+html.light .border-emerald-500\/40,
+html.light .border-emerald-500\/30,
+html.light .border-emerald-800\/80,
+html.light .border-emerald-800\/60 {
+  border-color: #86efac !important;
+}
+
+/* BDH Winner Badge in Light Mode */
+html.light .bg-emerald-500 {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
+}
+
+/* Red Elements (Out-of-Memory / Red Errors / Quiz Mistakes) */
+html.light .bg-red-950,
+html.light .bg-red-950\/80,
+html.light .bg-red-950\/60,
+html.light .bg-red-500\/20 {
+  background-color: #fef2f2 !important;
+}
+html.light .text-red-400,
+html.light .text-red-300,
+html.light .text-red-200 {
+  color: #991b1b !important;
+}
+html.light .border-red-600,
+html.light .border-red-500 {
+  border-color: #fca5a5 !important;
+}
+
+/* Keep crisp white text on solid red badges/chips (e.g. "💥 GPU VRAM
+   OVERFLOW!") instead of the global dark-navy text override. */
+html.light .bg-red-500.text-white,
+html.light .bg-red-600.text-white {
+  color: #ffffff !important;
+}
+
+/* Indigo Elements (Theory tab button, RecallDecayCurve icon) — the one
+   accent family missing from the light theme. */
+html.light .bg-indigo-950,
+html.light .bg-indigo-950\/90,
+html.light .bg-indigo-950\/80,
+html.light .bg-indigo-950\/40,
+html.light .bg-indigo-500\/20,
+html.light .bg-indigo-500\/10 {
+  background-color: #eef2ff !important;
+}
+html.light .text-indigo-400,
+html.light .text-indigo-300,
+html.light .text-indigo-200 {
+  color: #4338ca !important;
+}
+html.light .border-indigo-500\/60,
+html.light .border-indigo-500\/40,
+html.light .border-indigo-500\/30,
+html.light .border-indigo-500\/20 {
+  border-color: #a5b4fc !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. VICTORY DASHBOARD & HEAD-TO-HEAD CARDS AUDIT
+   -------------------------------------------------------------------------- */
+
+/* Live config pill badge */
+html.light .bg-slate-950\/80.border-slate-800 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* Metric Pill Badges in Head-to-Head Cards */
+html.light .bg-slate-900.text-cyan-300 {
+  background-color: #e0f2fe !important;
+  color: #0284c7 !important;
+  border-color: #7dd3fc !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. GUIDED LESSON & THEORY TABS AUDIT
+   -------------------------------------------------------------------------- */
+
+/* Active Step Pills in Guided Lesson */
+html.light .bg-slate-950.border-cyan-400.text-white {
+  background-color: #e0f2fe !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2) !important;
+}
+
+html.light .bg-slate-950.border-cyan-400.text-white * {
+  color: #0369a1 !important;
+}
+
+/* Inactive Step Pills in Guided Lesson */
+html.light .bg-slate-950\/40.text-slate-400 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. TOKEN SELECTOR CARDS & INTERACTIVE SELECTION STATES
+   -------------------------------------------------------------------------- */
+
+/* Selected Token Button in TestBench, AnimatedMemoryFlow, StepByStepToyModel */
+html.light .bg-gradient-to-b.from-cyan-950.to-slate-950,
+html.light .bg-gradient-to-b.from-cyan-900\/90.to-slate-950 {
+  background-image: none !important;
+  background-color: #e0f2fe !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2) !important;
+}
+
+html.light .bg-gradient-to-b.from-cyan-950.to-slate-950 *,
+html.light .bg-gradient-to-b.from-cyan-900\/90.to-slate-950 * {
+  color: #0369a1 !important;
+}
+
+/* Unselected Token Buttons */
+html.light .bg-slate-950\/80.text-slate-300 {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border-color: #e2e8f0 !important;
+}
+html.light .bg-slate-950\/80.text-slate-300:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #0284c7 !important;
+}
+
+/* BDH Winner Card Gradient in StressSimulator */
+html.light .bg-gradient-to-b.from-slate-950.to-emerald-950\/20 {
+  background-image: linear-gradient(to bottom, #ffffff, #f0fdf4) !important;
+  border-color: #86efac !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. SPECIAL COMPONENT LIGHT STYLES
+   -------------------------------------------------------------------------- */
+
+/* Header Sticky Bar */
+html.light header {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Form Inputs & Range Controls */
+html.light input[type="range"] {
+  accent-color: #0284c7;
+}
+
+/* Code Blocks & Monospace Formulas */
+html.light code,
+html.light .font-mono {
+  color: #0f172a;
+}
+
+/* SVG Text */
+html.light svg text {
+  fill: #475569 !important;
+}

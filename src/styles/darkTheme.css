@@ -1,0 +1,60 @@
+/* ==========================================================================
+   DARK THEME STYLESHEET (Cyberpunk / Synaptic AI Laboratory Vibe)
+   Default mode for cache-vs-hatch
+   ========================================================================== */
+
+:root,
+html:not(.light) {
+  --bg-app: #030712;
+  --bg-card: #090d16;
+  --bg-card-secondary: #0f172a;
+  --bg-card-subtle: #1e293b;
+  
+  --text-main: #f3f4f6;
+  --text-heading: #ffffff;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --border-card: rgba(30, 41, 59, 0.8);
+  --border-hover: rgba(6, 182, 212, 0.4);
+
+  --mesh-1: rgba(6, 182, 212, 0.08);
+  --mesh-2: rgba(168, 85, 247, 0.08);
+  --mesh-3: rgba(236, 72, 153, 0.05);
+
+  --grid-line: rgba(255, 255, 255, 0.03);
+
+  --synapse-glow-color: rgba(6, 182, 212, 0.5);
+  --node-glow-color: rgba(244, 63, 94, 0.7);
+  --kv-glow-color: rgba(168, 85, 247, 0.5);
+}
+
+/* Base Body Dark Preset */
+html:not(.light) body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(at 0% 0%, var(--mesh-1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, var(--mesh-2) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, var(--mesh-3) 0px, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.5) 0%, rgba(3, 7, 18, 0.9) 100%);
+}
+
+/* Dark Mode Grid Pattern */
+html:not(.light) .bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+}
+
+/* Scrollbar Dark Preset */
+html:not(.light) ::-webkit-scrollbar-track {
+  background: #090d16;
+}
+html:not(.light) ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+html:not(.light) ::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}

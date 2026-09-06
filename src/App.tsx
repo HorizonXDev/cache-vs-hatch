@@ -39,7 +39,9 @@ export function App() {
 
   // Generate sequence of random tokens client-side
   const tokens = useMemo(() => {
-    return generateTokenSequence(sequenceLength, dimension);
+    // Seed is genuinely consumed: the PRNG produces deterministic vectors,
+    // and bumping the seed regenerates them.
+    return generateTokenSequence(sequenceLength, dimension, seed);
   }, [sequenceLength, dimension, seed]);
 
   // Compute Transformer KV Cache state

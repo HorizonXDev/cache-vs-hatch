@@ -1,0 +1,85 @@
+The Architecture of AI Memory: Transformers, KV Cache &amp; BDH
+An interactive Exploration of efficient AI memory Architectures
+TEAM MEMBERS: 
+Manan Sharma
+Sezal Kukreja
+Pratyaksh Thakur
+Institute: Amity University Mohali, Punjab
+Data forge 2026 - Pathway X rime 
+What is this project about?This project is the comparison of how Dragon Hatchling (BDH) is more efficient than the KV-Caching architecture, explores Key-Value (KV) Caching during autoregressive generation, and introduces Dragon Hatchling (BDH) as an alternative approach to processing and maintaining information. The accompanying website provides visual and interactive explanations to make these concepts easier to understand.
+What problem does this project address?Transformer-based models can require substantial computation and memory when processing long sequences. During autoregressive generation, previously processed information may need to remain available for future tokens. Our project aims to explain this memory challenge and help user understand how KV Cache and BDH approach the processing and retention of information.
+What is a Transformer? 
+A Transformer is a neural-network architecture designed to process sequences using attention mechanisms. It became especially important in NLP (Natural Language Processing) because it can generate relationships between tokens efficiently and can process information in parallel during training.
+Why are Transformers important?Transformers form the foundation of many modern large language models like ChatGPT, Llama etc. Their attention mechanism allows the model to determine how different tokens relate to one another, making Transformers effective for understanding and generating sequences.
+What is a token?
+A token is a unit of text processed by a language model. Depending on the tokenizer, a token can represent a complete word, part of a word, punctuation, or another piece of text.
+Why does a model use tokens?
+Neural networks operate on numerical representations. Tokenization converts text into manageable units that can then be mapped to numerical representations and processed by the model.
+What is autoregressive generation?
+Autoregressive generation is a process in which a model generates a sequence one token at a time, using previously generated tokens as context for predicting the next token.
+Example: “I love” → “I love AI” → “I love AI because…”
+Each newly generated token becomes part of the context for subsequent predictions.
+What is self-attention?
+Self-attention is a mechanism that allows a model to determine how strongly different tokens in a sequence should influence one another. It helps the model identify which parts of the available context are relevant when processing a particular token.
+Why is this a problem?
+Repeatedly computing information that has already been calculated can introduce unnecessary computation. Additionally, storing information for long contexts can consume substantial memory.
+This motivates techniques such as KV Caching.
+ What is KV Cache?
+KV Cache is a technique used during Transformer inference in which previously computed Key and Value representations are stored so they can be reused when generating subsequent tokens.
+ Why is it called KV Cache?
+It is called KV Cache because the cached information primarily consists of the Keys (K) and Values (V) from previous tokens.
+ How does KV Cache work step by step?
+Suppose the model receives:
+“I love AI”
+During processing, the model computes Key and Value representations. These are stored in the cache. When the next token is generated: “because”, the model can reuse the previously computed K/V information instead of recomputing the K/V representations for all previous tokens. The cache therefore grows as new tokens are generated.
+Simple visualization:
+Token 1 → K₁ V₁
+Token 2 → K₂ V₂
+Token 3 → K₃ V₃
+             ↓
+   KV CACHE
+   ↓
+         New Token → reuse previous K/V
+What are the main advantages?
+Reduces redundant computation during autoregressive generation. 
+Improves generation efficiency. 
+Allows previously calculated K/V representations to be reused. 
+Is widely used in Transformer-based LLM inference. 
+ Does KV Cache solve every memory problem?
+No. KV Cache reduces repeated computation, but the cache itself consumes memory. As the context and number of generated tokens increase, the amount of cached K/V information can also increase.
+ What is the main trade-off?
+Less re-computation ↔ More memory usage: KV Cache exchanges additional memory storage for improved inference efficiency.
+ What is Dragon Hatchling (BDH)?
+Dragon Hatchling (BDH) is an architecture that explores a different approach to sequence processing and maintaining information compared with conventional Transformer-based approaches. Rather than simply treating the problem as storing the Keys and Values of all previous tokens, BDH provides an alternative architectural perspective on how information can be processed and retained.
+What is the key difference?
+KV Cache is a mechanism used with Transformer inference to store and reuse previously computed Key and Value representations. BDH represents a different architectural approach to processing sequential information and maintaining useful internal information.
+Comparison
+<w:tblPr><w:tblW w:w="0" w:type="auto"/><w:tblCellSpacing w:w="15" w:type="dxa"/><w:tblCellMar><w:top w:w="15" w:type="dxa"/><w:left w:w="15" w:type="dxa"/><w:bottom w:w="15" w:type="dxa"/><w:right w:w="15" w:type="dxa"/></w:tblCellMar><w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr><w:tblGrid><w:gridCol w:w="2300"/><w:gridCol w:w="2739"/><w:gridCol w:w="3987"/></w:tblGrid><w:tr w:rsidR="0000332A" w:rsidRPr="004406B3" w14:paraId="7BE31F6F" w14:textId="77777777"><w:trPr><w:tblHeader/><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="706D71AA" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:b/><w:bCs/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:b/><w:bCs/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Aspect
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="31AE8730" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:b/><w:bCs/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:b/><w:bCs/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>KV Cache
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="0F84FCCE" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:b/><w:bCs/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:b/><w:bCs/><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>BDH
+<w:trPr><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="5339D2CB" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Context
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="6C589E1E" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Transformer inference
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="1EB6E614" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Alternative architecture
+<w:trPr><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="048C00DF" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Main idea
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="0A0A17BF" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Cache previous K/V
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="403DBEB9" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Maintain/process information through its architecture
+<w:trPr><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="446449CB" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Primary purpose
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="566FC68A" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Avoid redundant K/V computation
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="19207526" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Explore efficient sequential processing
+<w:trPr><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="2C2A7595" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Memory approach
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="73ED9F3B" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Explicit K/V cache
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="7E028CEC" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Architecture-specific internal state/mechanism
+<w:trPr><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="6C519BEF" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Generation
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="11D8238D" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Autoregressive Transformer generation
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="2BD8984A" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Depends on BDH architecture
+<w:trPr><w:tblCellSpacing w:w="15" w:type="dxa"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="39BFE10D" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Main consideration
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="1129702A" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Cache memory grows with context
+<w:tcPr><w:tcW w:w="0" w:type="auto"/><w:vAlign w:val="center"/><w:hideMark/></w:tcPr><w:p w14:paraId="7DC0B6D3" w14:textId="77777777" w:rsidR="0000332A" w:rsidRPr="004406B3" w:rsidRDefault="0000332A" w:rsidP="0000332A"><w:pPr><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr></w:pPr><w:r w:rsidRPr="004406B3"><w:rPr><w:sz w:val="36"/><w:szCs w:val="36"/></w:rPr><w:t>Different memory/computation trade-offs
+ Why should we care about AI memory?
+AI applications increasingly work with long conversations, documents, codebases, and other large contexts. Efficiently processing and retaining relevant information can affect inference speed, memory requirements, scalability, and overall system efficiency.
+What technologies are used?
+Frontend: React 19 + TypeScript with Tailwind CSS 4Visualization: Three.js (three 0.185 + @types/three), React Three Fiber 9, @react-three/drei 10 for 3D scenes, Framer Motion 13 for UI/animation, and canvas-confetti for celebration effects, Lucide React for iconsDeployment: npm build with GitHub Pages
+Q. What is the outcome of the project?
+The project provides a structured and interactive way to learn about Transformer-based AI memory, KV Caching, and BDH. Instead of presenting these concepts only through equations or research terminology, the website allows users to visualize the underlying ideas and compare different approaches.
+What is the conclusion of the project?
+Understanding how AI systems process and retain information is essential for understanding modern language-model architectures. Transformers use attention to relate information across tokens, while KV Cache improves autoregressive inference by reusing previously computed Key and Value representations. BDH provides a different architectural perspective on sequential information processing. Through our interactive website, we aim to make these complex concepts accessible, visual, and understandable for learners.
