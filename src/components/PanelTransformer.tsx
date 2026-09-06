@@ -53,7 +53,7 @@ export const PanelTransformer: React.FC<PanelTransformerProps> = ({
           <div className="flex items-center justify-between text-xs sm:text-sm text-slate-300 font-semibold">
             <span className="flex items-center gap-1.5">
               <Activity className="w-4 h-4 text-cyan-400" />
-              Dynamic Matrix Buffer [K ∈ ℝ^(N×D), V ∈ ℝ^(N×D)]
+              Dynamic Matrix Buffer [K ∈ ℝ<sup>N×D</sup>, V ∈ ℝ<sup>N×D</sup>]
             </span>
             <span className="font-mono text-cyan-300 text-xs">
               {sequenceLength}×{dimension} elements (×2)

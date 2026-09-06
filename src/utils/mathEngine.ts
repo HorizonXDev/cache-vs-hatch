@@ -210,7 +210,7 @@ export function computeToyModelStepHistory(
       transformerValues: JSON.parse(JSON.stringify(accumulatedValues)),
       bdhMatrix: JSON.parse(JSON.stringify(currentW)),
       activeSparseUnits: activeUnits,
-      explanation: `Step ${idx + 1}: Token "${token.label}" ${token.emoji} arrives! Transformer appends Row #${idx + 1} to [K] and [V] tables. BDH adds outer-product matrix k*v^T to synaptic matrix W with decay λ=${decayLambda.toFixed(2)}.`,
+      explanation: `Step ${idx + 1}: Token "${token.label}" ${token.emoji} arrives! Transformer appends Row #${idx + 1} to [K] and [V] tables. BDH adds outer-product matrix k·vᵀ to synaptic matrix W with decay λ=${decayLambda.toFixed(2)}.`,
     });
   });
 

@@ -89,7 +89,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
           <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
             <span className="text-xs font-bold text-slate-200 flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-              {"Ground Truth Target [v_target]"}
+              Ground Truth Target [v<sub>target</sub>]
             </span>
             <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/30">
               100% Exact
@@ -144,7 +144,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
           </div>
 
           <div className="space-y-2">
-            <div className="text-[11px] text-slate-400">{"Retrieved Output Vector [v_Trans]:"}</div>
+            <div className="text-[11px] text-slate-400">Retrieved Output Vector [v<sub>trans</sub>]:</div>
             <div className="grid grid-cols-4 gap-1.5 font-mono text-[10px]">
               {transformerOutput.map((v, i) => (
                 <div key={i} className="p-2 rounded-lg bg-cyan-950/40 border border-cyan-900/60 text-center text-cyan-200 font-semibold shadow-inner">
@@ -191,7 +191,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
           </div>
 
           <div className="space-y-2">
-            <div className="text-[11px] text-slate-400">{"Retrieved Output Vector [v_BDH = W · q]:"}</div>
+            <div className="text-[11px] text-slate-400">Retrieved Output Vector [v<sub>BDH</sub> = W·q]:</div>
             <div className="grid grid-cols-4 gap-1.5 font-mono text-[10px]">
               {bdhOutput.map((v, i) => (
                 <div key={i} className="p-2 rounded-lg bg-pink-950/40 border border-pink-900/60 text-center text-pink-200 font-semibold shadow-inner">
@@ -204,7 +204,7 @@ export const TestBench: React.FC<TestBenchProps> = ({
           {/* Theoretical Breakdown */}
           <div className="pt-2 text-[11px] text-slate-400 border-t border-slate-800/80 space-y-1 font-mono">
             <div className="flex justify-between">
-              <span>Decay Factor (λ^age):</span>
+              <span>Decay Factor (λ<sup>age</sup>):</span>
               <span className="text-pink-300 font-bold">{(decayFactor * 100).toFixed(1)}%</span>
             </div>
             <div className="flex justify-between">

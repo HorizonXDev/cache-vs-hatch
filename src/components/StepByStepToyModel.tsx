@@ -217,7 +217,7 @@ export const StepByStepToyModel: React.FC<StepByStepToyModelProps> = ({ decayLam
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
               <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800/80 shadow-sm">
-                <div className="text-cyan-400 font-bold mb-1.5">{"Key Vector k_t (Query Matcher):"}</div>
+                <div className="text-cyan-400 font-bold mb-1.5">Key Vector k<sub>t</sub> (Query Matcher):</div>
                 <div className="flex gap-2">
                   {state.keyVector.map((val, idx) => (
                     <span key={idx} className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-cyan-300 font-bold">
@@ -228,7 +228,7 @@ export const StepByStepToyModel: React.FC<StepByStepToyModelProps> = ({ decayLam
               </div>
 
               <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800/80 shadow-sm">
-                <div className="text-purple-400 font-bold mb-1.5">{"Value Vector v_t (Information Content):"}</div>
+                <div className="text-purple-400 font-bold mb-1.5">Value Vector v<sub>t</sub> (Information Content):</div>
                 <div className="flex gap-2">
                   {state.valueVector.map((val, idx) => (
                     <span key={idx} className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-purple-300 font-bold">
@@ -315,13 +315,13 @@ export const StepByStepToyModel: React.FC<StepByStepToyModelProps> = ({ decayLam
 
           <div className="space-y-2">
             <div className="text-[11px] text-slate-400">
-              Action: Adds outer-product k_t · v_tᵀ to W_t = λ · W_(t-1) + k_t · v_tᵀ.
+              Action: Adds outer-product k<sub>t</sub>·v<sub>t</sub>ᵀ to W<sub>t</sub> = λ·W<sub>t−1</sub> + k<sub>t</sub>·v<sub>t</sub>ᵀ.
             </div>
 
             {/* Fixed 4x4 Synaptic Matrix Grid */}
             <div>
               <div className="text-[10px] font-mono text-pink-400 mb-1.5">
-                Updated Fast-Weight Matrix [W_t ∈ ℝ^(4×4)]:
+                Updated Fast-Weight Matrix [W<sub>t</sub> ∈ ℝ<sup>4×4</sup>]:
               </div>
               <div className="grid grid-cols-4 gap-1.5 p-2.5 bg-slate-900/90 rounded-xl border border-slate-800 shadow-inner">
                 {state.bdhMatrix.map((row, r) =>

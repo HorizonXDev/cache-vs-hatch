@@ -243,7 +243,7 @@ export const VictoryDashboard: React.FC<VictoryDashboardProps> = ({
               </div>
             </div>
             <div className="flex justify-between text-[11px] sm:text-xs pt-1 text-slate-400">
-              <span>Signal trace (λ^age):</span>
+              <span>Signal trace (λ<sup>age</sup>):</span>
               <span className="text-slate-200 font-bold">{(decayFactor * 100).toFixed(1)}%</span>
             </div>
             <div className="flex justify-between text-[11px] sm:text-xs text-slate-400">

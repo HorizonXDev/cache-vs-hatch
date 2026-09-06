@@ -77,7 +77,7 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
           <div className="flex items-center justify-between text-xs sm:text-sm text-slate-300 font-semibold">
             <span className="flex items-center gap-1.5">
               <Flame className="w-4 h-4 text-pink-400" />
-              Fixed Fast-Weight Matrix [W_t ∈ ℝ^(D×D)]
+              Fixed Fast-Weight Matrix [W<sub>t</sub> ∈ ℝ<sup>D×D</sup>]
             </span>
             <span className="font-mono text-pink-300 text-xs font-bold bg-pink-950/80 px-2 py-0.5 rounded border border-pink-500/30">
               INVARIANT SIZE: {dimension}×{dimension}
@@ -153,7 +153,7 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
 
         <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800/80 space-y-2">
           <div className="text-[11px] text-slate-400">
-            Token #{selectedIndex + 1} Non-Negative Firing State (ReLU(k_t - θ)):
+            Token #{selectedIndex + 1} Non-Negative Firing State (ReLU(k<sub>t</sub> − θ)):
           </div>
           <div className="flex flex-wrap gap-1.5">
             {bdhState.sparseActivations[selectedIndex]?.map((act, idx) => (

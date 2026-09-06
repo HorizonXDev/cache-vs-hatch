@@ -209,7 +209,7 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
             </div>
             <div className="text-slate-300 text-[11px] flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-yellow-400" />
-              <span>λ^age: {(activePoint.decayFactor * 100).toFixed(1)}%</span>
+              <span>λ<sup>age</sup>: {(activePoint.decayFactor * 100).toFixed(1)}%</span>
             </div>
           </div>
         </motion.div>

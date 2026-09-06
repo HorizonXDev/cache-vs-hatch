@@ -245,7 +245,7 @@ export const GuidedLesson: React.FC = () => {
               BDH converts softmax attention into linear outer-product updates:
             </p>
             <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 font-mono text-xs text-purple-200 shadow-inner">
-              {"W_t = λ · W_{t-1} + ϕ(k_t) · ψ(v_t)^T  ==>  v_retrieved = W_t · ϕ(q_t)"}
+              W<sub>t</sub> = λ · W<sub>t−1</sub> + ϕ(k<sub>t</sub>) · ψ(v<sub>t</sub>)<sup>T</sup> &nbsp;&nbsp;⟹&nbsp;&nbsp; v<sub>retrieved</sub> = W<sub>t</sub> · ϕ(q<sub>t</sub>)
             </div>
             <p>
               where ϕ and ψ represent non-negative activation functions (ReLU). This transforms token retrieval into matrix-vector operations fully parallelizable on modern GPU hardware.
