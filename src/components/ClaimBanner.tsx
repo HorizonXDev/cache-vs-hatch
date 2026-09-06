@@ -5,7 +5,7 @@ export const ClaimBanner: React.FC = () => {
   return (
     <section
       aria-label="The central claim"
-      className="relative border border-slate-800 border-l-4 border-l-amber-500 rounded-xl bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 p-5 sm:p-7 lg:p-8 shadow-2xl space-y-3.5 sm:space-y-4"
+      className="relative border border-slate-800 border-l-4 border-l-amber-500 rounded-xl bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 p-5 sm:p-7 lg:p-8 shadow-2xl space-y-3.5 sm:space-y-4 dark\:from-slate-900 dark\:via-slate-900"
     >
       {/* Eyebrow label */}
       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.15em] uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">

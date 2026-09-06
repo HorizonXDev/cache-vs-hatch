@@ -127,6 +127,27 @@ html.light .bg-gradient-to-r.from-cyan-950\/50 {
   background-image: linear-gradient(to bottom, #ffffff, #f8fafc) !important;
 }
 
+/* ClaimBanner: a top-of-layout callout built from `bg-gradient-to-br
+   from-slate-900 via-slate-900 to-amber-950/30` with an amber left accent.
+   Map the slate stops to the card tints used elsewhere and keep the amber
+   side-tint so the banner still reads as a distinct bordered callout in light
+   mode (rather than flattening to a plain white card). */
+html.light .bg-gradient-to-br.from-slate-900.via-slate-900.to-amber-950\/30 {
+  background-image: linear-gradient(to bottom right, #f8fafc 0%, #ffffff 60%, #fffbeb 100%) !important;
+}
+html.light .bg-gradient-to-br.from-slate-900.via-slate-900.to-amber-950\/30 .text-slate-50 {
+  color: #020617 !important;
+}
+
+/* Keep the amber left accent visible and on-brand in light mode instead of
+   the dark `border-l-amber-500` sitting on a white background. */
+html.light .border-l-amber-500 {
+  border-left-color: #f59e0b !important;
+}
+html.light .border-l-4.border-l-amber-500 {
+  box-shadow: inset 3px 0 0 #f59e0b !important;
+}
+
 /* StressSimulator "GPU VRAM OVERFLOW" card: replace the dark red/navy
    gradient with a light red danger tint so the (dark) danger-colored text
    stays readable in light mode. */
@@ -179,6 +200,9 @@ html.light .text-slate-400 {
   color: #334155 !important;
 }
 
+html.light .text-slate-50 {
+  color: #0f172a !important;
+}
 html.light .text-slate-500 {
   color: #64748b !important;
 }
