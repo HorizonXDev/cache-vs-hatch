@@ -32,30 +32,30 @@ export const PanelTransformer: React.FC<PanelTransformerProps> = ({
       className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xl space-y-6 backdrop-blur-sm"
     >
       <div>
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
-          <div className="flex items-center gap-3.5">
-            <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/10">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-slate-800/80 pb-4">
+          <div className="flex items-center gap-3.5 min-w-0 flex-1">
+            <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/10 shrink-0">
               <Database className="w-6 h-6 sm:w-7 sm:h-7 text-cyan-400" />
             </div>
-            <div>
+            <div className="min-w-0 flex-1">
               <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
                 Standard Transformer (KV Cache)
               </h2>
               <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Stores full key-value sequence buffer in memory</p>
             </div>
           </div>
-          <span className="px-3 py-1 rounded-full font-mono text-xs font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 shadow-sm">
+          <span className="shrink-0 px-3 py-1 rounded-full font-mono text-xs font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 shadow-sm">
             Scaling: O(N · D)
           </span>
         </div>
 
         <div className="mt-5 space-y-3">
-          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-300 font-semibold">
-            <span className="flex items-center gap-1.5">
-              <Activity className="w-4 h-4 text-cyan-400" />
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs sm:text-sm text-slate-300 font-semibold">
+            <span className="flex items-center gap-1.5 min-w-0">
+              <Activity className="w-4 h-4 text-cyan-400 shrink-0" />
               Dynamic Matrix Buffer [K ∈ ℝ<sup>N×D</sup>, V ∈ ℝ<sup>N×D</sup>]
             </span>
-            <span className="font-mono text-cyan-300 text-xs">
+            <span className="shrink-0 font-mono text-cyan-300 text-xs">
               {sequenceLength}×{dimension} elements (×2)
             </span>
           </div>

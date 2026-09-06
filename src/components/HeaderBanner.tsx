@@ -21,22 +21,22 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = ({
 
   return (
     <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50 shadow-lg shadow-black/30">
-      <div className="max-w-7xl mx-auto px-5 py-4 sm:px-8 lg:px-10">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+      <div className="max-w-7xl mx-auto px-4 py-3 sm:px-8 sm:py-4 lg:px-10">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap-5">
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5">
+              <span className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                 DataForge 2026 · Pathway Track
               </span>
-              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-medium bg-purple-500/10 text-purple-300 border border-purple-500/30">
+              <span className="hidden md:inline-flex px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-medium bg-purple-500/10 text-purple-300 border border-purple-500/30">
                 Post-Transformer Frontiers
               </span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl xl:text-[1.7rem] font-extrabold tracking-tight text-white mt-3 flex items-center gap-3">
-              <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 shadow-lg shadow-cyan-500/20 shrink-0">
-                <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
+            <h1 className="text-lg sm:text-2xl xl:text-[1.7rem] font-extrabold tracking-tight text-white mt-2.5 sm:mt-3 flex items-center gap-2.5 sm:gap-3">
+              <div className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-2xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 shadow-lg shadow-cyan-500/20 shrink-0">
+                <Cpu className="w-4.5 h-4.5 sm:w-6 sm:h-6 text-cyan-400" />
               </div>
               <span className="min-w-0">
                 BDH vs. KV Caching:{' '}
@@ -45,53 +45,56 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = ({
                 </span>
               </span>
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed max-w-2xl">
+            <p className="hidden sm:block text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed max-w-2xl">
               An interactive educational sandbox comparing standard Transformers with Pathway's Dragon Hatchling (BDH)
               — no background required to follow along.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <div className="flex flex-col w-full lg:w-auto lg:flex-row items-stretch lg:items-center gap-2.5 shrink-0">
             {/* Primary view switcher: simple story <-> technical lab */}
-            <nav aria-label="View" className="flex items-center gap-1 p-1 rounded-xl bg-slate-950/60 border border-slate-800 shadow-inner">
+            <nav aria-label="View" className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-slate-950/60 border border-slate-800 shadow-inner lg:w-auto lg:flex">
               <button
                 onClick={onOpenStory}
                 aria-current={activeView === 'story' ? 'page' : undefined}
-                className={`switcher-button flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+                className={`switcher-button flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all min-w-0 ${
                   activeView === 'story'
                     ? 'bg-cyan-600 hover:bg-cyan-500 text-white border border-transparent shadow-md shadow-cyan-600/30'
                     : 'text-slate-300 hover:text-white border border-transparent'
                 }`}
               >
-                <BookOpen className={`w-4 h-4 ${activeView === 'story' ? 'text-white' : 'text-slate-400'}`} />
-                <span>Simple explainer</span>
+                <BookOpen className={`w-4 h-4 shrink-0 ${activeView === 'story' ? 'text-white' : 'text-slate-400'}`} />
+                <span className="truncate">Simple explainer</span>
               </button>
               <button
                 onClick={onOpenLab}
                 aria-current={activeView === 'lab' ? 'page' : undefined}
-                className={`switcher-button flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+                className={`switcher-button flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all min-w-0 ${
                   activeView === 'lab'
                     ? 'bg-purple-600 hover:bg-purple-500 text-white border border-transparent shadow-md shadow-purple-600/30'
                     : 'text-slate-300 hover:text-white border border-transparent'
                 }`}
               >
-                <FlaskConical className={`w-4 h-4 ${activeView === 'lab' ? 'text-white' : 'text-slate-400'}`} />
-                <span>Technical lab</span>
+                <FlaskConical className={`w-4 h-4 shrink-0 ${activeView === 'lab' ? 'text-white' : 'text-slate-400'}`} />
+                <span className="truncate">Technical lab</span>
               </button>
             </nav>
 
-            <ThemeToggle />
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => setIsOpen(!isOpen)}
-              aria-expanded={isOpen}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 text-xs sm:text-sm font-semibold text-slate-200 border border-slate-700/80 transition-all shadow-md hover:border-cyan-500/50"
-            >
-              <Info className="w-4 h-4 text-cyan-400" />
-              <span>{isOpen ? 'Hide Curriculum Info' : 'Lesson Curriculum & Objectives'}</span>
-              {isOpen ? <ChevronUp className="w-4 h-4 text-cyan-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
-            </motion.button>
+            <div className="flex items-center gap-2.5 w-full lg:w-auto">
+              <ThemeToggle />
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+                className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 text-xs sm:text-sm font-semibold text-slate-200 border border-slate-700/80 transition-all shadow-md hover:border-cyan-500/50"
+              >
+                <Info className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span className="hidden lg:inline">{isOpen ? 'Hide Curriculum Info' : 'Lesson Curriculum & Objectives'}</span>
+                <span className="lg:hidden">{isOpen ? 'Hide Curriculum' : 'Curriculum & Objectives'}</span>
+                {isOpen ? <ChevronUp className="w-4 h-4 text-cyan-400 shrink-0" /> : <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
+              </motion.button>
+            </div>
           </div>
         </div>
 

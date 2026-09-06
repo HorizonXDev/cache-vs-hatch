@@ -9,7 +9,7 @@ export const ClaimBanner: React.FC = () => {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="relative border border-slate-800 border-l-4 border-l-amber-500 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 p-7 sm:p-10 lg:p-12 shadow-2xl space-y-5 sm:space-y-6 overflow-hidden"
+      className="relative border border-slate-800 border-l-4 border-l-amber-500 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 p-6 sm:p-10 lg:p-12 shadow-2xl space-y-5 sm:space-y-6 overflow-hidden"
     >
       {/* Soft amber bloom in the corner so the card reads as a stage, not a box */}
       <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl" />

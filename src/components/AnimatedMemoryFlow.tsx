@@ -30,7 +30,7 @@ export const AnimatedMemoryFlow: React.FC = () => {
   const activeToken = tokens[activeStep - 1];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl space-y-7 sm:space-y-9 backdrop-blur-sm">
+    <div className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl space-y-6 sm:space-y-9 backdrop-blur-sm">
       {/* Title Banner */}
       <div className="flex flex-col xl:flex-row xl:items-center justify-between border-b border-slate-800/80 pb-6 gap-4">
         <div className="flex items-center gap-4">
@@ -82,7 +82,7 @@ export const AnimatedMemoryFlow: React.FC = () => {
 
       {/* Token Stream Strip */}
       <div className="space-y-3">
-        <div className="flex justify-between items-center text-sm text-slate-300">
+        <div className="flex justify-between items-center gap-2 text-xs sm:text-sm text-slate-300">
           <span className="font-semibold">1. Incoming Word Stream</span>
           <span className="font-mono text-cyan-300 bg-cyan-950/80 px-3 py-1 rounded-lg border border-cyan-500/30 text-xs">
             Step {activeStep} of {totalSteps}
@@ -111,7 +111,7 @@ export const AnimatedMemoryFlow: React.FC = () => {
                     : 'bg-slate-950/60 border-slate-900 text-slate-600'
                 }`}
               >
-                <div className="text-2xl sm:text-3xl mb-1.5">{token.emoji}</div>
+                <div className="text-xl sm:text-3xl mb-1">{token.emoji}</div>
                 <div className="text-xs sm:text-sm font-semibold truncate">{token.label}</div>
                 {isActive && (
                   <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
@@ -148,7 +148,7 @@ export const AnimatedMemoryFlow: React.FC = () => {
         </div>
 
         {/* Dual Animated Flow Paths */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7">
           {/* Path A: Standard Transformer Notebook Stack */}
           <div className="bg-slate-900/60 p-5 sm:p-6 rounded-2xl border border-cyan-900/40 space-y-5 relative shadow-xl">
             <div className="flex justify-between items-center border-b border-slate-800/80 pb-3">

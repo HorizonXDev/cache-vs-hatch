@@ -74,7 +74,7 @@ export const RecallDecayCurve: React.FC<RecallDecayCurveProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-xs font-mono">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs font-mono">
           <span className="flex items-center gap-2 text-cyan-300 font-semibold bg-cyan-950/60 px-2.5 py-1 rounded-lg border border-cyan-500/30">
             <span className="w-3 h-1 bg-cyan-400 rounded-full" /> Transformer (100% Flat)
           </span>

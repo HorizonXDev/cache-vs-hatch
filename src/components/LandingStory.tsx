@@ -35,14 +35,14 @@ const staggerItem: Variants = {
 
 export const LandingStory: React.FC<LandingStoryProps> = ({ onOpenLab }) => {
   return (
-    <div className="space-y-20 sm:space-y-28">
+    <div className="space-y-16 sm:space-y-28">
       {/* ---------- 1. Hero: the idea in plain words ---------- */}
       <motion.section
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="relative overflow-hidden bg-gradient-to-b from-indigo-950/60 via-slate-900/90 to-slate-950/90 border border-slate-800/90 rounded-[2rem] p-8 sm:p-12 lg:p-16 shadow-2xl space-y-8 sm:space-y-10 backdrop-blur-sm"
+        className="relative overflow-hidden bg-gradient-to-b from-indigo-950/60 via-slate-900/90 to-slate-950/90 border border-slate-800/90 rounded-[1.75rem] sm:rounded-[2rem] p-6 sm:p-12 lg:p-16 shadow-2xl space-y-7 sm:space-y-10 backdrop-blur-sm"
       >
         {/* Floating ambient orbs */}
         <motion.div
@@ -73,7 +73,7 @@ export const LandingStory: React.FC<LandingStoryProps> = ({ onOpenLab }) => {
           <motion.div variants={stagger} initial="hidden" animate="visible">
             <motion.h1
               variants={staggerItem}
-              className="text-3xl sm:text-5xl lg:text-[3.6rem] font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl"
+              className="text-[1.75rem] leading-[1.12] sm:text-5xl sm:leading-[1.08] lg:text-[3.6rem] font-extrabold tracking-tight text-white max-w-4xl"
             >
               AI memory has one core problem:{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-200">it grows forever,</span>{' '}
@@ -83,7 +83,7 @@ export const LandingStory: React.FC<LandingStoryProps> = ({ onOpenLab }) => {
 
             <motion.p
               variants={staggerItem}
-              className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mt-6"
+              className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-3xl mt-4 sm:mt-6"
             >
               Every AI that chats keeps a running memory of the conversation. Two designs solve that
               memory differently. This page shows you both on five simple words — then lets you open
@@ -238,7 +238,7 @@ export const LandingStory: React.FC<LandingStoryProps> = ({ onOpenLab }) => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
-        className="bg-slate-900/90 border border-slate-800/90 rounded-[2rem] p-8 sm:p-12 shadow-2xl space-y-8 sm:space-y-10"
+        className="bg-slate-900/90 border border-slate-800/90 rounded-[1.75rem] sm:rounded-[2rem] p-6 sm:p-12 shadow-2xl space-y-8 sm:space-y-10"
       >
         <div className="max-w-3xl">
           <p className="font-mono text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-amber-400 mb-2">

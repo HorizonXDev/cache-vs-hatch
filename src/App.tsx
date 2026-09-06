@@ -151,7 +151,7 @@ export function App() {
     <button
       key={tab}
       onClick={() => setLabTab(tab)}
-      className={`px-4 py-3 rounded-xl text-left transition-all flex items-center gap-3 border ${
+      className={`px-4 py-3 rounded-xl text-left transition-all flex items-center gap-3 border w-full md:w-auto ${
         active ? activeClasses : 'bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-700'
       }`}
     >
@@ -181,7 +181,7 @@ export function App() {
 
       {/* Toy reimplementation disclosure — hackathon rule: toy models must be identified as such */}
       <div className="relative z-10 border-b border-amber-900/40 bg-amber-950/25 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-5 py-4 sm:px-8 lg:px-10 flex items-start gap-3.5 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-4 py-3 sm:px-8 lg:px-10 flex items-start gap-3 sm:gap-4">
           <div className="hidden sm:flex w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 items-center justify-center shrink-0 mt-0.5">
             <FlaskConical className="w-4.5 h-4.5 text-amber-400" />
           </div>
@@ -200,7 +200,7 @@ export function App() {
       </div>
 
       {/* Main Content Area */}
-      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-5 py-8 sm:px-8 lg:px-10 sm:py-10 space-y-14 sm:space-y-20">
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 py-6 sm:px-8 lg:px-10 sm:py-12 space-y-10 sm:space-y-20">
         {/* Central falsifiable claim — the first thing a learner or judge reads, above all demos */}
         <ClaimBanner />
 
@@ -211,7 +211,7 @@ export function App() {
           /* ---------------- TECHNICAL LAB ---------------- */
           <div
             id="technical-lab"
-            className="space-y-12 sm:space-y-14 animate-in fade-in duration-200"
+            className="space-y-10 sm:space-y-14 animate-in fade-in duration-200"
           >
             {/* Lab header */}
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-6 border-b border-slate-800">
@@ -240,8 +240,8 @@ export function App() {
               </button>
             </div>
 
-            {/* Lab tabs (plain English) */}
-            <nav className="flex flex-wrap gap-3">
+            {/* Lab tabs (plain English) — full-width grid rows on phones for easy tapping */}
+            <nav className="grid grid-cols-2 gap-2.5 md:flex md:flex-wrap md:gap-3">
               {labTabButton(
                 labTab === 'simulator',
                 'simulator',
@@ -278,7 +278,7 @@ export function App() {
 
             {/* ---------------- Tab: Interactive simulator ---------------- */}
             {labTab === 'simulator' && (
-              <div className="space-y-12 sm:space-y-14">
+              <div className="space-y-10 sm:space-y-14">
                 <ControlsBar
                   sequenceLength={sequenceLength}
                   setSequenceLength={setSequenceLength}
@@ -301,7 +301,7 @@ export function App() {
                   retrievalResult={retrievalResult}
                 />
 
-                <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                   <PanelTransformer
                     transformerState={transformerState}
                     sequenceLength={sequenceLength}
@@ -340,21 +340,21 @@ export function App() {
 
             {/* ---------------- Tab: 3D animations ---------------- */}
             {labTab === '3d' && (
-              <div className="space-y-12 sm:space-y-14">
+              <div className="space-y-10 sm:space-y-14">
                 <Model3DSimulator />
               </div>
             )}
 
             {/* ---------------- Tab: Extreme scale ---------------- */}
             {labTab === 'stress' && (
-              <div className="space-y-12 sm:space-y-14">
+              <div className="space-y-10 sm:space-y-14">
                 <StressSimulator />
               </div>
             )}
 
             {/* ---------------- Tab: Theory, lesson & quiz ---------------- */}
             {labTab === 'theory' && (
-              <div className="space-y-12 sm:space-y-14">
+              <div className="space-y-10 sm:space-y-14">
                 <GuidedLesson />
                 <StepByStepToyModel decayLambda={decayLambda} />
                 <Class10Explainer />
@@ -371,8 +371,29 @@ export function App() {
             <Sparkles className="w-4.5 h-4.5 text-cyan-400" />
             <span>DataForge 2026 Pathway Track Submission</span>
           </div>
-          <div className="text-slate-400">
-            Built with React, Tailwind CSS &amp; Lucide Icons. Pure 100% Client-Side Simulation.
+          <div className="flex items-center justify-center gap-2.5 text-sm">
+            <motion.span
+              aria-hidden
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-block text-lg sm:text-xl"
+            >
+              🚀
+            </motion.span>
+            <span className="text-slate-300">
+              Developed by{' '}
+              <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-teal-300 to-purple-300">
+                Team Horizon
+              </span>
+            </span>
+            <motion.span
+              aria-hidden
+              animate={{ opacity: [0.4, 1, 0.4], scale: [0.9, 1.25, 0.9] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-block text-lg sm:text-xl"
+            >
+              ✨
+            </motion.span>
           </div>
           <div className="text-slate-500 font-mono text-xs">
             Pathway Post-Transformer Architecture Series (BDH)

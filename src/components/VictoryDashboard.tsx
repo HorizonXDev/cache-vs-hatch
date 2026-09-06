@@ -41,7 +41,7 @@ export const VictoryDashboard: React.FC<VictoryDashboardProps> = ({
   return (
     <div className="bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-7 backdrop-blur-sm">
       {/* Dashboard Title */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800/80 pb-6 gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800/80 pb-5 sm:pb-6 gap-4">
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/10 shrink-0">
             <GitCompareArrows className="w-6 h-6 sm:w-7 sm:h-7 text-cyan-400" />

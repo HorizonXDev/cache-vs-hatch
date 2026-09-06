@@ -37,13 +37,13 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
       className="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xl space-y-6 backdrop-blur-sm"
     >
       <div>
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
-          <div className="flex items-center gap-3.5">
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-md shadow-emerald-500/10">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-slate-800/80 pb-4">
+          <div className="flex items-center gap-3.5 min-w-0 flex-1">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-md shadow-emerald-500/10 shrink-0">
               <Trophy className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-400" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-white">
                   Pathway Dragon Hatchling (BDH)
                 </h2>
@@ -54,7 +54,7 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
               <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Stores relationships in a fixed synaptic weight matrix</p>
             </div>
           </div>
-          <span className="px-3 py-1 rounded-full font-mono text-xs font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40 shadow-sm">
+          <span className="shrink-0 px-3 py-1 rounded-full font-mono text-xs font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40 shadow-sm">
             Scaling: O(1) Constant
           </span>
         </div>
@@ -74,12 +74,12 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
 
         {/* Fixed Synaptic Matrix Grid Visualizer */}
         <div className="mt-5 space-y-3">
-          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-300 font-semibold">
-            <span className="flex items-center gap-1.5">
-              <Flame className="w-4 h-4 text-pink-400" />
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs sm:text-sm text-slate-300 font-semibold">
+            <span className="flex items-center gap-1.5 min-w-0">
+              <Flame className="w-4 h-4 text-pink-400 shrink-0" />
               Fixed Fast-Weight Matrix [W<sub>t</sub> ∈ ℝ<sup>D×D</sup>]
             </span>
-            <span className="font-mono text-pink-300 text-xs font-bold bg-pink-950/80 px-2 py-0.5 rounded border border-pink-500/30">
+            <span className="shrink-0 font-mono text-pink-300 text-xs font-bold bg-pink-950/80 px-2 py-0.5 rounded border border-pink-500/30">
               INVARIANT SIZE: {dimension}×{dimension}
             </span>
           </div>
@@ -90,9 +90,11 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
               <span>N={sequenceLength} sequence tokens processed</span>
             </div>
 
+            {/* Scrolls horizontally on narrow screens so each synapse cell stays readable */}
+            <div className="overflow-x-auto rounded-xl border border-slate-800/80 bg-slate-900/60">
             <div
-              className="grid gap-1.5 justify-center p-2.5 bg-slate-900/60 rounded-xl border border-slate-800/80"
-              style={{ gridTemplateColumns: `repeat(${dimension}, minmax(0, 1fr))` }}
+              className="grid gap-1.5 justify-center p-2.5 mx-auto min-w-max"
+              style={{ gridTemplateColumns: `repeat(${dimension}, minmax(28px, 1fr))` }}
             >
               {bdhState.weightMatrix.map((row, r) =>
                 row.map((val, c) => {
@@ -103,7 +105,7 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
                   return (
                     <div
                       key={`w-${r}-${c}`}
-                      className={`h-7 sm:h-8 rounded-lg flex items-center justify-center font-mono text-[9px] font-bold transition-all relative group cursor-pointer ${
+                      className={`h-8 sm:h-9 rounded-lg flex items-center justify-center font-mono text-[10px] sm:text-[11px] font-bold transition-all relative group cursor-pointer ${
                         isActiveUnit
                           ? 'border border-pink-400 active-node-glow scale-105'
                           : 'border border-slate-800'
@@ -124,8 +126,9 @@ export const PanelBDH: React.FC<PanelBDHProps> = ({
                 })
               )}
             </div>
+            </div>
 
-            <div className="flex justify-between items-center text-[11px] text-slate-400 font-mono pt-1.5">
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-[11px] text-slate-400 font-mono pt-1.5">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-pink-500" /> Positive Weight
               </span>
