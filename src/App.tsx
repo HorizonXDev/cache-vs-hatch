@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import { HeaderBanner } from './components/HeaderBanner';
+import { ClaimBanner } from './components/ClaimBanner';
 import { LandingStory } from './components/LandingStory';
 import { VictoryDashboard } from './components/VictoryDashboard';
 import { Model3DSimulator } from './components/Model3DSimulator';
@@ -127,6 +128,9 @@ export function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+        {/* Central falsifiable claim — the first thing a learner or judge reads, above all demos */}
+        <ClaimBanner />
+
         {!showLab ? (
           /* ---------------- SIMPLE STORY (default landing) ---------------- */
           <LandingStory onOpenLab={() => openLab('simulator')} />
