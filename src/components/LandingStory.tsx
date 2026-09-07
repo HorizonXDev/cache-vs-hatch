@@ -299,7 +299,7 @@ export const LandingStory: React.FC<LandingStoryProps> = ({ onOpenLab }) => {
             <ArrowRight className="w-4.5 h-4.5" />
           </motion.button>
           <p className="text-xs text-slate-400 mt-4 font-mono">
-            Matrices, memory math, 3D animation, a 1-million-word stress test, and cited theory.
+            Matrices, memory math, 3D animation, a 1-million-word stress test, cited theory, and recent research.
           </p>
         </div>
       </motion.section>

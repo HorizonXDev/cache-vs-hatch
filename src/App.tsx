@@ -14,6 +14,7 @@ import { TestBench } from './components/TestBench';
 import { RecallDecayCurve } from './components/RecallDecayCurve';
 import { GuidedLesson } from './components/GuidedLesson';
 import { StepByStepToyModel } from './components/StepByStepToyModel';
+import { RecentResearch } from './components/RecentResearch';
 import { ControlsBar } from './components/ControlsBar';
 import {
   generateTokenSequence,
@@ -21,9 +22,9 @@ import {
   computeBDHSynapticMatrix,
   queryModels,
 } from './utils/mathEngine';
-import { Sparkles, Cpu, Box, Flame, BookOpenCheck, ArrowLeft, FlaskConical } from 'lucide-react';
+import { Sparkles, Cpu, Box, Flame, BookOpenCheck, ArrowLeft, FlaskConical, BookMarked } from 'lucide-react';
 
-type LabTab = 'simulator' | '3d' | 'stress' | 'theory';
+type LabTab = 'simulator' | '3d' | 'stress' | 'theory' | 'research';
 
 /** Thin gradient bar under the very top of the page that fills as you scroll. */
 function ScrollProgress() {
@@ -111,20 +112,52 @@ export function App() {
     const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
     const target = el.getBoundingClientRect().top + window.scrollY - headerBottom - 16;
     window.scrollTo({ top: Math.max(target, 0), left: 0, behavior: 'smooth' });
+
+    // On phones the browser chrome (URL bar) collapses while the smooth scroll is
+    // still in flight, which shifts the viewport and leaves the target misaligned.
+    // Re-align once the scroll settles — but only for small drifts, so we never
+    // fight the user if they start scrolling on their own.
+    const realign = () => {
+      const h = document.querySelector('header');
+      const hb = h ? h.getBoundingClientRect().bottom : 0;
+      const t = el.getBoundingClientRect().top + window.scrollY - hb - 16;
+      const delta = t - window.scrollY;
+      if (Math.abs(delta) > 4 && Math.abs(delta) < 200) {
+        window.scrollTo({ top: t, left: 0, behavior: 'smooth' });
+      }
+    };
+    if (typeof window.onscrollend !== 'undefined') {
+      window.addEventListener('scrollend', realign, { once: true });
+    } else {
+      window.setTimeout(realign, 700);
+    }
   };
 
   // When opening the lab, land on the lab's own header ("Full simulator & deep dive")
   // instead of the top of the page — so the claim box stays out of the way.
   const scrollToLabHeader = () => {
-    // Wait one frame so React has committed the lab view before measuring.
-    requestAnimationFrame(() => {
+    // The lab view mounts right after the state flip, but on slow devices its first
+    // paint can take longer than a single frame. Retry until the element actually
+    // exists instead of falling back to the top of the page.
+    let attempts = 0;
+    const tryScroll = () => {
       const labEl = document.getElementById('technical-lab');
-      if (labEl) {
-        scrollBelowHeader(labEl);
-      } else {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      if (!labEl) {
+        if (attempts < 24) {
+          attempts += 1;
+          window.setTimeout(tryScroll, 30);
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        }
+        return;
       }
-    });
+      // Give the browser a couple of frames to finish layout (fonts, images,
+      // sticky header) before measuring the scroll target.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => scrollBelowHeader(labEl));
+      });
+    };
+    tryScroll();
   };
 
   // Open the technical lab (optionally on a specific tab)
@@ -228,7 +261,8 @@ export function App() {
                 <p className="text-sm sm:text-base text-slate-400 mt-2 leading-relaxed">
                   Every number here is computed live in your browser from seeded random vectors —
                   nothing is hardcoded. Use the tabs to explore the matrices, the 3D view, an
-                  extreme-scale memory test, or the cited theory.
+                  extreme-scale memory test, the cited theory, or recent research on the
+                  KV-cache problem.
                 </p>
               </div>
               <button
@@ -273,6 +307,14 @@ export function App() {
                 'Theory, lesson & quiz',
                 'the science behind the demo',
                 'bg-indigo-950 border-indigo-500/60 text-white shadow-lg shadow-indigo-950/40'
+              )}
+              {labTabButton(
+                labTab === 'research',
+                'research',
+                <BookMarked className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />,
+                'Recent research',
+                '3 papers on KV-cache compression & eviction',
+                'bg-emerald-950 border-emerald-500/60 text-white shadow-lg shadow-emerald-950/40'
               )}
             </nav>
 
@@ -358,6 +400,13 @@ export function App() {
                 <GuidedLesson />
                 <StepByStepToyModel decayLambda={decayLambda} />
                 <Class10Explainer />
+              </div>
+            )}
+
+            {/* ---------------- Tab: Recent research ---------------- */}
+            {labTab === 'research' && (
+              <div className="space-y-10 sm:space-y-14">
+                <RecentResearch onOpenSimulator={() => openLab('simulator')} />
               </div>
             )}
           </div>
